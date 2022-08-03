@@ -15,6 +15,15 @@
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     color: white;
   }
+
+  .today,
+  .date{
+    height:30px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    padding: 20px;
+  }
   
   .location,
   .temperature {
@@ -46,4 +55,5 @@
   .temperature-description {
     font-size: 30px;
   }
+
   

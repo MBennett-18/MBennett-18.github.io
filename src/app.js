@@ -1,8 +1,21 @@
 let lat;
 let long;
+//Setting html objects here
 let summaryDesc = document.querySelector(".temperature-description");
 let tempDegree = document.querySelector(".temperature-degree");
 let locationTimezone = document.querySelector(".location-timezone");
+let todaysDate = document.querySelector(".date");
+
+//Create array of month names to use on date
+const months = ["Janurary","February", "March", "April", "Mary", "June", "July", "August", "September", "October", "November", "December"];
+const today  = new Date();
+const currentMonth = months[today.getMonth()];
+const currentDay = today.getDay();
+const currentYear = today.getFullYear();
+const dateString = `${currentMonth} ${currentDay}, ${currentYear}`;
+console.log(dateString);
+
+todaysDate.textContent = dateString;
 
 // If location is known, then go ahead
 if (navigator.geolocation) {
