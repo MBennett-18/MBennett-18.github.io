@@ -16,8 +16,8 @@
     color: white;
   }
 
-  .today,
-  .date{
+  .welcome-today,
+  .welcome-date{
     height:30px;
     align-items: center;
     justify-content: space-around;

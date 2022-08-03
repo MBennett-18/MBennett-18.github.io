@@ -9,15 +9,15 @@ let todaysDate = document.querySelector(".date");
 //Create array of month names to use on date
 const months = ["Janurary","February", "March", "April", "Mary", "June", "July", "August", "September", "October", "November", "December"];
 const today  = new Date();
+//get date sections to create string
 const currentMonth = months[today.getMonth()];
 const currentDay = today.getDay();
 const currentYear = today.getFullYear();
 const dateString = `${currentMonth} ${currentDay}, ${currentYear}`;
-console.log(dateString);
 
 todaysDate.textContent = dateString;
 
-// If location is known, then go ahead
+// If location is known, then go ahead with weather conditions
 if (navigator.geolocation) {
   // position is the callbal function
   navigator.geolocation.getCurrentPosition((position) => {
@@ -49,7 +49,3 @@ if (navigator.geolocation) {
       });
   });
 }
-//function setIcons(icon, iconID){
-//const skycons = new skycons({color: "white"});
-//const currentIcon =
-//}
