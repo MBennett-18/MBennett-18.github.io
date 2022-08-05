@@ -18,11 +18,13 @@
 
   .welcome-today,
   .welcome-date{
-    height:30px;
+    height:2vh;
     align-items: center;
     justify-content: space-around;
     display: flex;
-    padding: 20px;
+    padding: 15px;
+    font-size: 25px;
+    text-align: center;
   }
   
   .location,
@@ -54,4 +56,14 @@
   
   .temperature-description {
     font-size: 30px;
+  }
+
+  .test{
+    height:2vh;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    padding: 15px;
+    font-size: 10px;
+    text-align: center;
   }
