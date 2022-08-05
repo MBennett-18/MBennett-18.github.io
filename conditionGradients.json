@@ -1,0 +1,36 @@
+{
+    "Thunderstorm" :  {
+        "startGrad" : "#f9e625",
+        "endGrad" : "#325e83"
+    },
+    "Drizzle" :
+    {
+        "startGrad" : "",
+        "endGrad" : ""
+    },
+    "Rain" : {
+        "startGrad" : "",
+        "endGrad" : ""
+    },
+    "Snow" : {
+        "startGrad" : "",
+        "endGrad" : ""
+    },
+    "Fog" : {
+        "startGrad" : "",
+        "endGrad" : ""
+    },
+    "Mist" : {
+        "startGrad" : "",
+        "endGrad" : ""
+    },
+    "Clear" : {
+        "startGrad" : "",
+        "endGrad" : ""
+    },
+    "Clouds" : {
+        "startGrad" : "",
+        "endGrad" : ""
+    }
+}
+

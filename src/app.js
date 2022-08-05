@@ -4,22 +4,26 @@ let long;
 let summaryDesc = document.querySelector(".temperature-description");
 let tempDegree = document.querySelector(".temperature-degree");
 let locationTimezone = document.querySelector(".location-timezone");
-let todaysDate = document.querySelector(".date");
+let todaysDate = document.querySelector(".welcome-date");
+let body = document.getElementById("gradient");
 
 //Create array of month names to use on date
 const months = ["Janurary","February", "March", "April", "Mary", "June", "July", "August", "September", "October", "November", "December"];
+const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 const today  = new Date();
 //get date sections to create string
 const currentMonth = months[today.getMonth()];
+const currentWeekday = daysOfWeek[today.getDay()];
 const currentDay = today.getDay();
 const currentYear = today.getFullYear();
-const dateString = `${currentMonth} ${currentDay}, ${currentYear}`;
+const dateString = `${currentWeekday}, ${currentMonth} ${currentDay}, ${currentYear}`;
 
+//Setting html element
 todaysDate.textContent = dateString;
 
 // If location is known, then go ahead with weather conditions
 if (navigator.geolocation) {
-  // position is the callbal function
+  // position is the callbal functions
   navigator.geolocation.getCurrentPosition((position) => {
     lat = position.coords.latitude;
     long = position.coords.longitude;
@@ -36,8 +40,10 @@ if (navigator.geolocation) {
       .then((apiData) => {
         //parse out data and convert to C
         const temp = Math.round((apiData.main.temp - 273) * 10) / 10;
-        const summary = apiData.weather["0"].main;
+        const summaryRaw = apiData.weather["0"].description;
+        const summary = summaryRaw.charAt(0).toUpperCase() + summaryRaw.slice(1);
         const timezone = apiData.name;
+        //Set icon
         const icon = apiData.weather["0"].icon;
         const iconURL = `https://openweathermap.org/img/wn/${icon}@2x.png`;
         //console.log(iconURL);
@@ -46,6 +52,14 @@ if (navigator.geolocation) {
         summaryDesc.textContent = summary;
         locationTimezone.textContent = timezone;
         document.getElementById("icon").src = iconURL;
+
+        // Change background based on conditions
+        //Determine weather
+
+
+        body.style.background = "linear-gradient(#f9e625,#325e83)"
+        CSS.textContent = body.style.background;
+
       });
   });
 }
