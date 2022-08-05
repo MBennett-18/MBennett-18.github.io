@@ -20,6 +20,7 @@ const dateString = `${currentWeekday}, ${currentMonth} ${currentDay}, ${currentY
 //Setting html element
 todaysDate.textContent = dateString;
 
+  console.log(navigator.geolocation);
 // If location is known, then go ahead with weather conditions
 if (navigator.geolocation) {
   // position is the callbal functions
@@ -61,7 +62,6 @@ if (navigator.geolocation) {
         .then(gradData => {
           const currentDesc = apiData.weather["0"].main;
           //const currentDesc = "Clouds";
-          const grad = gradData[currentDesc].startGrad;
           body.style.background = "linear-gradient(" + gradData[currentDesc].startGrad + "," + gradData[currentDesc].endGrad +")";
           body.style.color = gradData[currentDesc].font ;
           CSS.textContent = body.style.background;
@@ -69,5 +69,12 @@ if (navigator.geolocation) {
 
         });
       });
-  });
+  },geoFail(),{timeout:10000});
+}
+// Catch when location services off
+function geoFail() {
+  body.style.color = "black";
+  CSS.textContent = body.style.color;
+  locationTimezone.textContent = "Unknown Location";
+  tempDegree.textContent = "Allow location services"
 }
