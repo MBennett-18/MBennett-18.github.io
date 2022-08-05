@@ -31,14 +31,14 @@
         "font" :"#505050"
     },
     "Clear" : {
-        "startGrad" : "",
-        "endGrad" : "",
-        "font" : ""
+        "startGrad" : "#ffb749",
+        "endGrad" : "#91bff2",
+        "font" : "white"
     },
     "Clouds" : {
-        "startGrad" : "",
-        "endGrad" : "",
-        "font" : ""
+        "startGrad" : "#bef0ff",
+        "endGrad" : "#f5ffff",
+        "font" : "#505050"
     }
 }
 

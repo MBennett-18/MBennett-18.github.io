@@ -59,8 +59,8 @@ if (navigator.geolocation) {
         fetch('src/conditionGradients.json')
         .then(response => response.json())
         .then(gradData => {
-          //const currentDesc = apiData.weather["0"].main;
-          const currentDesc = "Mist";
+          const currentDesc = apiData.weather["0"].main;
+          //const currentDesc = "Clouds";
           const grad = gradData[currentDesc].startGrad;
           body.style.background = "linear-gradient(" + gradData[currentDesc].startGrad + "," + gradData[currentDesc].endGrad +")";
           body.style.color = gradData[currentDesc].font ;
