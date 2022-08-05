@@ -17,7 +17,6 @@ const currentWeekday = daysOfWeek[today.getDay()];
 const currentDay = today.getDay();
 const currentYear = today.getFullYear();
 const dateString = `${currentWeekday}, ${currentMonth} ${currentDay}, ${currentYear}`;
-
 //Setting html element
 todaysDate.textContent = dateString;
 
@@ -57,9 +56,18 @@ if (navigator.geolocation) {
         //Determine weather
 
 
-        body.style.background = "linear-gradient(#f9e625,#325e83)"
-        CSS.textContent = body.style.background;
+        fetch('src/conditionGradients.json')
+        .then(response => response.json())
+        .then(gradData => {
+          //const currentDesc = apiData.weather["0"].main;
+          const currentDesc = "Mist";
+          const grad = gradData[currentDesc].startGrad;
+          body.style.background = "linear-gradient(" + gradData[currentDesc].startGrad + "," + gradData[currentDesc].endGrad +")";
+          body.style.color = gradData[currentDesc].font ;
+          CSS.textContent = body.style.background;
+          CSS.textContent = body.style.color;
 
+        });
       });
   });
 }

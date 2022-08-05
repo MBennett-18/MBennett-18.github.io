@@ -1,0 +1,44 @@
+{
+    "Thunderstorm" :  {
+        "startGrad" : "#F9E625",
+        "endGrad" : "#325E83",
+        "font" : "white"
+    },
+    "Drizzle" :
+    {
+        "startGrad" : "#08B3E5",
+        "endGrad" : "#1BD7BB",
+        "font" : "white"
+    },
+    "Rain" : {
+        "startGrad" : "#395877",
+        "endGrad" : "#92BAD2",
+        "font" : "white"
+    },
+    "Snow" : {
+        "startGrad" : "#eaeaea",
+        "endGrad" : "#c6efff",
+        "font" : "#505050"
+    },
+    "Fog" : {
+        "startGrad" : "#d4d4d4",
+        "endGrad" : "#58595b",
+        "font" :"#505050"
+    },
+    "Mist" : {
+        "startGrad" : "#d9e5e0",
+        "endGrad" : "#DDE5F7",
+        "font" :"#505050"
+    },
+    "Clear" : {
+        "startGrad" : "",
+        "endGrad" : "",
+        "font" : ""
+    },
+    "Clouds" : {
+        "startGrad" : "",
+        "endGrad" : "",
+        "font" : ""
+    }
+}
+
