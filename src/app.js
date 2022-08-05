@@ -10,17 +10,12 @@ let body = document.getElementById("gradient");
 //Create array of month names to use on date
 const months = ["Janurary","February", "March", "April", "Mary", "June", "July", "August", "September", "October", "November", "December"];
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
 const today  = new Date();
-//get date sections to create string
-const currentMonth = months[today.getMonth()];
-const currentWeekday = daysOfWeek[today.getDay()];
-const currentDay = today.getDay();
-const currentYear = today.getFullYear();
-const dateString = `${currentWeekday}, ${currentMonth} ${currentDay}, ${currentYear}`;
+const dateString = daysOfWeek[today.getDay()] + ", " + months[today.getMonth()] + " " + today.getDay() +", " +today.getFullYear()
 //Setting html element
 todaysDate.textContent = dateString;
 
-  console.log(navigator.geolocation);
 // If location is known, then go ahead with weather conditions
 if (navigator.geolocation) {
   // position is the callbal functions
