@@ -52,7 +52,7 @@ if (navigator.geolocation) {
         //Determine weather
 
 
-        fetch('src/conditionGradients.json')
+        fetch('/src/conditionGradients.json')
         .then(response => response.json())
         .then(gradData => {
           const currentDesc = apiData.weather["0"].main;
