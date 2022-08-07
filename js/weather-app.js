@@ -12,14 +12,14 @@ const months = ["Janurary","February", "March", "April", "Mary", "June", "July",
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 const today  = new Date();
-const dateString = daysOfWeek[today.getDay()] + ", " + months[today.getMonth()] + " " + today.getDay() +", " +today.getFullYear()
+const dateString = daysOfWeek[today.getDay()] + ", " + months[today.getMonth()] + " " + today.getDate() +", " +today.getFullYear()
 //Setting html element
 todaysDate.textContent = dateString;
 
 // If location is known, then go ahead with weather conditions
 if (navigator.geolocation) {
   // position is the callbal functions
-  navigator.geolocation.getCurrentPosition((position) => {
+  navigator.geolocation.getCurrentPosition(position => {
     lat = position.coords.latitude;
     long = position.coords.longitude;
 
@@ -29,10 +29,8 @@ if (navigator.geolocation) {
 
     // waiting for response from API and returning json
     fetch(apiCall)
-      .then((apiResponse) => {
-        return apiResponse.json();
-      })
-      .then((apiData) => {
+      .then(apiResponse => apiResponse.json())
+      .then(apiData => { 
         //parse out data and convert to C
         const temp = Math.round((apiData.main.temp - 273) * 10) / 10;
         const summaryRaw = apiData.weather["0"].description;
