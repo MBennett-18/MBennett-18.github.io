@@ -29,7 +29,7 @@ body {
     height: 25vh;
     width: 30%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around; 
     align-items: center;
 }
   
@@ -59,6 +59,7 @@ body {
 
 .circles-parent { 
     text-align:center; 
+    line-height: 50px;
 }
 .circle{ 
     margin-bottom: 10px;
