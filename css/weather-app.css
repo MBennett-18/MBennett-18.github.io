@@ -10,6 +10,7 @@ body {
     color: #505050;
   }
 
+
 .welcome-today,
 .welcome-date{
     height:2vh;
@@ -52,4 +53,24 @@ body {
 .temperature-description {
     font-size: 30px;
     text-align: center;
+}
+
+.circles-parent { 
+    text-align:center; 
+}
+.circle{ 
+    margin-bottom: 10px;
+    height: 60px;
+    width: 70px;
+    background: ghostwhite; 
+    border-radius:30%; 
+    display:inline-block; 
+    border:1px solid darkgrey; 
+}
+
+.refs{
+    margin-top: 15px ;
+    font-size: 12px;
+    text-align: left;
+    margin-right: auto;
 }
