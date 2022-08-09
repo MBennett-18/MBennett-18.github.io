@@ -23,7 +23,6 @@ todaysDate.textContent = dateString;
 
 // position is the callbal functions
 navigator.geolocation.getCurrentPosition(position => {
-  console.log("nowhere2");
   lat = position.coords.latitude;
   long = position.coords.longitude;
 
@@ -64,7 +63,6 @@ navigator.geolocation.getCurrentPosition(position => {
         });
       // Get seed for pallete, and then generator pallete from seed
       const weatherMain = apiData.weather["0"].main.toLowerCase();
-      console.log(weatherMain);
       const apiSeedCall = `https://www.colr.org/json/tag/${weatherMain}`;
       fetch(apiSeedCall)
         .then(responseSeed => responseSeed.json())

@@ -8,19 +8,19 @@ const width = 460 - margin.left - margin.right;
 const height = 400 - margin.top - margin.bottom;
 
 
-    // append the svg object to the body of the page
-const svg = d3.select("#theViz")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+//     // append the svg object to the body of the page
+// const svg = d3.select("#theViz")
+//     .append("svg")
+//     .attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom)
+//     .append("g")
+//     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-d3.csv("https://data.novascotia.ca/resource/mdfn-jkdg.csv")
-    .then(function (data) {
-    console.log(data.cases.max);
-    const x = d3.scaleLinear()
-    .domain([0,data.cases.max])
-})
+// d3.csv("https://data.novascotia.ca/resource/mdfn-jkdg.csv")
+//     .then(function (data) {
+//     console.log(data.cases.max);
+//     const x = d3.scaleLinear()
+//     .domain([0,data.cases.max])
+// })
 
 
     // fetch(apiCall) https://d3-graph-gallery.com/graph/scatter_basic.html
