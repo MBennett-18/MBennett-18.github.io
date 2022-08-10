@@ -1,41 +1,57 @@
-* {
+/* Style the tab */
+body, html {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
+  font-family: Arial;
+  background-color: #f0f0f0;
+}
 
+.tab {
+  overflow: scroll;
+  background-color: #005d93;
+}
 
-body{
-  height: 100vh;
-  background: linear-gradient(#74828F, #BEB9B5);
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 20px 25px;
+  transition: 0.3s;
   color: white;
+  font-size: 14px;
 }
 
-.landing {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  padding: 10px;
+/* Create a dead button as title */
+.header{
+  pointer-events: none;
+  padding: 0%;
+  margin-left: -10px;
 }
 
-.landing h1,
-.landing h2 {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  margin-bottom: 10px;
-}
-
-.landing a{
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-a:visited {
-  color:crimson;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-/* List of pages  */
-#landing-pages {
-  list-style-position: inside;
-  font-size: 18px;
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: rgb(122, 189, 255);
 }
 
 
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: rgb(122, 189, 255);
+  color: black;
+}
+
+/* Style the tab content */
+.content {
+  height: 100%;
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+}
+
+#inlineWeatherApp{
+  height: 100%;
+  width: 100%;
+}

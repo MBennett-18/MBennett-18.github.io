@@ -76,7 +76,7 @@ navigator.geolocation.getCurrentPosition(position => {
           //Select random color from seed array
           const inputHex = seedArr[Math.floor(Math.random() *  seedArr.length)];
           // Using starting hex as seed, generate random pallete
-          const apiColorCall = `https://www.thecolorapi.com/scheme?hex=${inputHex}&format=json&mode=analogic-complement&count=5`;
+          const apiColorCall = `https://www.thecolorapi.com/scheme?hex=${inputHex}&format=json&mode=quad&count=5`;
           fetch(apiColorCall)
             .then(responseCol => responseCol.json())
             .then(colorData => { 
