@@ -47,11 +47,12 @@ body, html {
 .content {
   height: 100%;
   display: none;
-  padding: 6px 12px;
+  padding: 3px 3px;
   border-top: none;
 }
 
 #inlineWeatherApp{
   height: 100%;
   width: 100%;
+  border: none;
 }
