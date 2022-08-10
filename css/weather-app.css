@@ -33,10 +33,7 @@ body {
     align-items: center;
 }
   
-.temperature {
-    flex-direction: column;
-}
-  
+
 .degree-section {
     display: flex;
     align-items: center;
@@ -51,10 +48,17 @@ body {
 .degree-section h2 {
     font-size: 40px;
 }
+
+.temperature {
+    flex-direction: column;
+}
   
 .temperature-description {
-    font-size: 26px;
+    font-size: 24px;
     text-align: center;
+    width: 100%;
+    white-space: nowrap;
+    margin-bottom: 5px;
 }
 
 .circles-parent { 
