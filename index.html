@@ -7,14 +7,30 @@
     <link rel="stylesheet" href="css/styles.css"/>
     <title>Homepage</title>
   </head>
-    <div class="landing">
-      <h1> Landing Page Here</h1>
+  <div class="tab">
+    <button class="header" id="falseButton">Mark's Projects Page - Work in progress</button>
+    <button class="tab-link" onclick="openTab(event, 'aboutPage')" id="defaultLand">About Project</button>
+    <button class="tab-link" onclick="openTab(event, 'aboutMe')">About Me</button>
+    <button class="tab-link" onclick="openTab(event, 'weatherApp')">Weather App</button>
+  </div>
 
-      <ul id="landing-pages">
-        <li><a href="html/weather-app.html">Weather App</a></li>
-        <li><a href="html/nd-reporting.html">Reporting</a></li>
-      </ul>
-    </div>  
-    </div>
+
+  <div id="aboutPage" class="content">
+    <h3>Project Information</h3>
+    <p>Add in what this page does</p>
+  </div>
+
+  <div id="aboutMe" class="content">
+    <h3>About Me</h3>
+    <p>wip</p>
+  </div>
+
+  <div id="weatherApp" class="content">
+    <p>This web applet below provides weather conditions in your current location. Using the weather description, the Colr API finds colors tagged with the description, and a random color is selected. This random color is passed to TheColorAPI to generate a pallete using the random seed color. This provides a color pallete that tries to capture the current weather conditions.</p>
+    <iframe id="inlineWeatherApp" height="500"
+    src="/html/weather-app.html"></iframe>
+  </div>
+
+  <script src = "./app.js"></script>
   </body>
 </html>
