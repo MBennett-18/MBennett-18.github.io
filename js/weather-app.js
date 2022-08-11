@@ -35,7 +35,7 @@ navigator.geolocation.getCurrentPosition(position => {
     .then(apiResponse => apiResponse.json())
     .then(apiData => { 
       //parse out data and convert to C
-      const temp = Math.round((apiData.main.temp - 273) * 10) / 10;
+      const temp = Math.round((apiData.main.feels_like - 273) * 10) / 10;
       const summaryRaw = apiData.weather["0"].description;
       const summary = summaryRaw.charAt(0).toUpperCase() + summaryRaw.slice(1);
       const timezone = apiData.name;

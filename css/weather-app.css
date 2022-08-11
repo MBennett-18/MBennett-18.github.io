@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body {
     height: 100vh;
     width: 100vw;
@@ -11,7 +16,6 @@ body {
     color: #505050;
   }
 
-
 .btn{
     background-color: #005d93; /* Blue background */
     border: none; 
@@ -20,17 +24,15 @@ body {
     cursor: pointer; 
     border-radius: 30%;
     font-size: 16px;
+    margin-right: auto;
+    margin-left: 8px;
+    margin-top: 50px;
 }
 
 .btn:hover{
     background-color: rgb(122, 189, 255);
     color: black;
 }
-  #btn-refresh{
-    margin-right: auto;
-    margin-left: 8px;
-    
-  }
 
 .welcome-today,
 .welcome-date{
@@ -38,9 +40,9 @@ body {
     align-items: center;
     justify-content: space-around;
     display: flex;
-    padding: 10px;
-    margin-top: 10px;
-    font-size: 25px;
+    padding: 8px;
+    margin-top: 8px;
+    font-size: 22px;
     text-align: center;
 }
   
@@ -53,7 +55,6 @@ body {
     align-items: center;
 }
   
-
 .degree-section {
     display: flex;
     align-items: center;
@@ -96,7 +97,8 @@ body {
 }
 
 .refs{
-    margin-top: 15px ;
+    margin-top: auto;
+    margin-bottom: 5px;
     font-size: 12px;
     text-align: left;
     margin-right: auto;
