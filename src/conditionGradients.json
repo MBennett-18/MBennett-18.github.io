@@ -23,7 +23,7 @@
     "Fog" : {
         "startGrad" : "#d4d4d4",
         "endGrad" : "#58595b",
-        "font" :"#505050"
+        "font" :"white"
     },
     "Mist" : {
         "startGrad" : "#d9e5e0",
