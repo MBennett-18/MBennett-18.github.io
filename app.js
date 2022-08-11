@@ -1,4 +1,4 @@
-// document.getElementById("defaultLand").click();
+document.getElementById("defaultLand").click();
 
 function openTab(evt, tabName) {
     // Declare all variables
