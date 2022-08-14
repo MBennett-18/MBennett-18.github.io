@@ -4,13 +4,20 @@
      box-sizing: border-box; 
 }
 
+body, html{
+    background-color: #d2d9de;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 p{
     font-size: 15px;
     line-height: 1.5em;
     color: rgb(88, 88, 88);
 }
 
-h2,h4{
+h2,h3,h4{
     color: rgb(88, 88, 88);
 }
 
@@ -22,11 +29,29 @@ i{
     color:#235d93;
 }
 
-body, html{
-    background-color: #d2d9de;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+footer i{
+    color: white;  
+    font-size: 1.5em !important;
+}
+
+footer p{
+    color: white;
+}/pen/
+
+footer i:hover{
+    color: rgb(0, 58, 97);
+}
+
+li{
+    line-height: 1.4em;
+    color: rgb(88, 88, 88);
+    font-size: 15px;
+    text-indent: -0.85em;
+    padding: 5px 0px;
+}
+
+#publicationList li i:hover{
+    color:black;
 }
 
 .page-container{
@@ -81,20 +106,22 @@ body, html{
 .twoThird-Content{
     margin-left: 10px;
     margin-right: 10px;
+
 }
 
+.container-icon {
+    --h: 40px; /* size */
+    --g: 18px; /* gap */
+    height: var(--h);
+    width: calc(5*var(--h) + 5*var(--g));
+    background: linear-gradient(90deg, #4b6d8b calc(var(--n, 0)*20%), rgb(200, 200, 200) 0);
+    -webkit-mask: radial-gradient(calc(var(--h)/2) at calc(var(--h)/2) 50%, #000 87%, #0000 91%) 0/calc(var(--h) + var(--g)) 100%;
+  }
 
-footer i{
-    color: white;  
-    font-size: 1.5em !important;
-}
-
-footer p{
-    color: white;
-}
-
-footer i:hover{
-    color: rgb(0, 58, 97);
+.oneThird-Content-Software,
+.oneThird-Content-Programming{
+    line-height: 0.3em !important;
+    margin-bottom: 8px;
 }
 
 
