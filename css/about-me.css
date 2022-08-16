@@ -9,10 +9,12 @@ body, html{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: Arial;
+    height: 100%;
 }
 
 p{
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.5em;
     color: rgb(88, 88, 88);
 }
@@ -21,16 +23,10 @@ h2,h3,h4{
     color: rgb(88, 88, 88);
 }
 
-.twoThird-Content-edu h4{
-    color: #4b6d8b;
-}
-
-.twoThird-Content-Item h4{
-    color: #4b6d8b;
-}
 
 h5{
     color:rgb(88, 88, 88);
+    font-size: 16px;
 }
 
 i{
@@ -57,6 +53,15 @@ li{
     text-indent: -0.85em;
     padding: 5px 0px;
 }
+
+.twoThird-Content-edu h4{
+    color: #4b6d8b;
+}
+
+.twoThird-Content-Item h4{
+    color: #4b6d8b;
+}
+
 
 #publicationList li i:hover{
     color:black;
@@ -117,14 +122,6 @@ li{
 
 }
 
-.container-icon {
-    --h: 40px; /* size */
-    --g: 18px; /* gap */
-    height: var(--h);
-    width: calc(5*var(--h) + 5*var(--g));
-    background: linear-gradient(90deg, #4b6d8b calc(var(--n, 0)*20%), rgb(200, 200, 200) 0);
-    -webkit-mask: radial-gradient(calc(var(--h)/2) at calc(var(--h)/2) 50%, #000 87%, #0000 91%) 0/calc(var(--h) + var(--g)) 100%;
-  }
 
 .oneThird-Content-Software,
 .oneThird-Content-Programming{
@@ -132,14 +129,25 @@ li{
     margin-bottom: 8px;
 }
 
-
 .footer-block{
     text-align: center;
     background-color: steelblue;
     color: white;
     float: left;
     width: 100%;
+    margin-top: 0% !important; /* Overrule the styles footer */
 }
+
+.container-icon {
+    --h: 40px; /* size */
+    --g: 18px; /* gap */
+    height: var(--h);
+    width: calc(5*var(--h) + 5*var(--g));
+    background: linear-gradient(90deg, #4b6d8b calc(var(--n, 0)*20%), rgb(200, 200, 200) 0);
+    -webkit-mask: radial-gradient(calc(var(--h)/2) at calc(var(--h)/2) 50%, #000 87%, #0000 91%) 0/calc(var(--h) + var(--g)) 100%;
+    font-size: 12px;
+  }
+
 
 @media  (max-width:1027px) {
     .oneThird{

@@ -6,13 +6,16 @@ body, html {
   background-color: #d2d9de;
 }
 
-.tab {
-  overflow: scroll;
-  background-color: #375971
+.tabFooter{
+  margin-top: 50%;
 }
 
+.topTab {
+  overflow: auto;
+  background-color: #375971
+}
 /* Style the buttons that are used to open the tab content */
-.tab button {
+.topTab button {
   background-color: inherit;
   float: left;
   border: none;
@@ -23,6 +26,15 @@ body, html {
   color: white;
   font-size: 14px;
 }
+/* Change background color of buttons on hover */
+.topTab button:hover {
+  background-color: #90a3b0;
+}
+/* Create an active/current tablink class */
+.topTab button.active {
+  background-color: #90a3b0;
+  color: black;
+}
 
 /* Create a dead button as title */
 .header{
@@ -30,30 +42,92 @@ body, html {
   padding: 0%;
   margin-left: -10px;
 }
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #90a3b0;
-}
-
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #90a3b0;
-  color: black;
-}
-
 /* Style the tab content */
 .content {
   height: 100%;
+  width: 100%;
   display: none;
   padding: 3px 3px;
   border-top: none;
 }
-
-#inlineWeatherApp,
 #inlineAboutMe{
   height: 100vh;
   width: 100vw;
   border: none;
 }
+/* ************* Projects tab CSS ************* */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none; }
+
+.tabs {
+    display: block;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0;
+    overflow: auto; 
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+.tabs [class^="tab"] label,
+.tabs [class*=" tab"] label {
+    color: #375971;
+    cursor: pointer;
+    display: block;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1em;
+    padding: 2rem 0;
+    text-align: center; }
+.tabs [class^="tab"] [type="radio"],
+.tabs [class*=" tab"] [type="radio"] {
+    border-bottom: 1px solid rgba(239, 237, 239, 0.5);
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; }
+.tabs [class^="tab"] [type="radio"]:hover, 
+.tabs [class^="tab"] [type="radio"]:focus,
+.tabs [class*=" tab"] [type="radio"]:hover,
+.tabs [class*=" tab"] [type="radio"]:focus {
+  border-bottom: 1px solid #375971; }
+.tabs [class^="tab"] [type="radio"]:checked,
+.tabs [class*=" tab"] [type="radio"]:checked {
+    border-bottom: 2px solid #375971; }
+.tabs [class^="tab"] [type="radio"]:checked + div,
+.tabs [class*=" tab"] [type="radio"]:checked + div {
+    opacity: 1; }
+.tabs [class^="tab"] [type="radio"] + div,
+.tabs [class*=" tab"] [type="radio"] + div {
+    display: block;
+    opacity: 0;
+    padding: 2rem 0;
+    width: 90%;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; }
+.tabs .tab-2 {
+  width: 33%; }
+.tabs .tab-2 [type="radio"] + div {
+    width: 100%;
+    margin-left: 100%; }
+.tabs .tab-2 [type="radio"]:checked + div {
+    margin-left: 0; }
+.tabs .tab-2:last-child [type="radio"] + div {
+    margin-left: 100%; }
+.tabs .tab-2:last-child [type="radio"]:checked + div {
+    margin-left: 0%; }

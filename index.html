@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="css/styles.css"/>
     <title>Homepage</title>
   </head>
-  <div class="tab">
-    <button class="header" id="falseButton">Mark's Projects Page - Work in progress</button>
+  <div class="topTab">
+    <button class="header" id="falseButton">Mark's Homepage</button>
     <button class="tab-link" onclick="openTab(event, 'aboutPage')">About Project</button>
-    <button class="tab-link" onclick="openTab(event, 'aboutMe')" id="defaultLand">About Me</button>
-    <button class="tab-link" onclick="openTab(event, 'weatherApp')">Weather App</button>
+    <button class="tab-link" onclick="openTab(event, 'aboutMe')" >About Me</button>
+    <button class="tab-link" onclick="openTab(event, 'Projects')" id="defaultLand">Projects</button>
   </div>
 
 
@@ -24,10 +24,36 @@
     <iframe id="inlineAboutMe" src="/html/about-me.html"></iframe>
   </div>
 
-  <div id="weatherApp" class="content">
-    <p>This web applet uses the weather description and hands it to the Colr API to find colors tagged with the description. This random color is passed to TheColorAPI to generate a pallete using the random seed color. This provides a color pallete that tries to capture the current weather conditions.</p>
-    <iframe id="inlineWeatherApp" 
-    src="/html/weather-app.html"></iframe>
+  <div id="Projects" class="content">
+    <div class="tabs">
+      <div class="tab-2">
+        <label for="tab2-1"><i class="fa-solid fa-cloud-sun"></i>Weather</label>
+        <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+        <div>
+          <h4><a href="./html/weather-app.html">Today's Weather and Colors</a></h4>
+          <p>This web applet uses the weather description and hands it to the Colr API to find colors tagged with the description. This random color is passed to TheColorAPI to generate a pallete using the random seed color. This provides a color pallete that tries to capture the current weather conditions.</p>
+        </div>
+      </div>
+      <div class="tab-2">
+        <label for="tab2-2">Flu Twitter</label>
+        <input id="tab2-2" name="tabs-two" type="radio">
+        <div>
+          <h4>Tab Two</h4>
+          <p>Quisque sit amet turpis leo.</p>
+        </div>
+      </div>
+      <div class="tab-2">
+        <label for="tab2-3">Third Option</label>
+        <input id="tab2-3" name="tabs-two" type="radio">
+        <div>
+          <h4>Tab Three</h4>
+          <p>Quisque sit amet turpis leo.</p>
+        </div>
+      </div>
+    </div>
+    <footer class="tabFooter">
+      Tab designed inspired by: <a href="https://github.com/flkt-crnpio/pitaya" target="_blank">Pitaya</a>  
+    </footer>
   </div>
 
   <script src = "./app.js"></script>
