@@ -17,22 +17,33 @@ fetch('/src/dailyTweets.json')
                   labels: x,
                   datasets: [{
                     fill: true,
-                    lineTension: 0,
+                    lineTension: 0.5,
                     backgroundColor: "#586575",
                     data: y
                   }]
                 },
                 options: {
+                    scales:{
+                        xAxes:[{
+                            gridLines:{
+                                drawOnChartArea: false,
+                                color: "#000000"
+                            }
+                        }],
+                        yAxes:[{
+                            gridLines: {
+                                drawOnChartArea: false,
+                                color: "#000000"
+                            }
+                        }]
+                    },
                     title:{
                         display:true,
                         fontSize: 18,
                         fontColor: '#002b36',
-                        text: "Number of Tweets in Nova Scotia Containing Flu or Influenza"
+                        text: "Number of Daily Tweets in Nova Scotia Containing Flu or Influenza"
                     },
                     legend: {display: false},
-                    xAxes:[{
-                        type: 'time'
-                    }]
                 }
               });
 
