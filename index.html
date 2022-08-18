@@ -12,7 +12,7 @@
     <button class="header" id="falseButton"><i class="fa-solid fa-diagram-project"></i> Mark's Homepage</button>
     <!-- <button class="tab-link" onclick="openTab(event, 'aboutPage')" id="defaultLand">About Project</button> -->
     <button class="tab-link" onclick="openTab(event, 'aboutMe')" id="defaultLand">About Me</button>
-    <button class="tab-link" onclick="openTab(event, 'Projects')" >Projects</button>
+    <button class="tab-link" onclick="openTab(event, 'Projects')">Projects</button>
   </div>
 
   <!-- <div id="aboutPage" class="content">
@@ -30,7 +30,7 @@
         <label for="tab2-1"><i class="fa-solid fa-cloud-sun"></i> Weather</label>
         <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
         <div>
-          <h4><a href="./html/weather-app.html">Today's Weather and Colors</a></h4>
+          <h4><a class="weather" href="./html/weather-app.html">Today's Weather and Colors</a></h4>
           <p>This web applet uses the weather description and hands it to the Colr API to find colors tagged with the description. This random color is passed to TheColorAPI to generate a pallete using the random seed color. This provides a color pallete that tries to capture the current weather conditions.</p>
         </div>
       </div>
@@ -38,8 +38,9 @@
         <label for="tab2-2"><i class="fa-solid fa-head-side-cough"></i> Flu Twitter</label>
         <input id="tab2-2" name="tabs-two" type="radio">
         <div>
-          <h4>Reporting Flu Twitter Chatter</h4>
-          <p>Coming Soon</p>
+          <h3><a class="flu" href="./html/flu-twitter.html">Flu Twitter</a></h3>
+          <h5>Work in Progress</h5>
+          <p>Using the Twitter API, tweets containing the words "Flu" or "Influenza" around Nova Scotia are colelcted and analyzed.</p>
         </div>
       </div>
       <div class="tab-2">
