@@ -74,8 +74,87 @@ fetch('/src/dailyTweets.json')
                     },
                     legend: {display: false},
                 }
-              });
+            });
 
+           // Clean up some of the locations
+            dailyData.forEach((d) => {
+                if (d.location) {
+                   d.location = d.location.toLowerCase();
+                   if (d.location.includes('halifax')){
+                       d.location ='halifax'
+                   }else if(d.location.includes('moncton')){
+                       d.location = 'moncton';
+                   }else if(d.location.includes('dartmouth')){
+                       d.location = 'dartmouth';
+                   }
+                   else if(d.location.includes('the ocean')){
+                       d.location = 'the ocean';
+                   }
+               }
+           })
+
+           // Count tweets by location
+           let perLoc = new Object();
+           dailyData.forEach((d) => {
+               perLoc[d.location] = perLoc[d.location] ? ++perLoc[d.location]:1;
+           })
+
+           // Allow object to be sorted 
+           let perLocSortable = [];
+           for (let loc in perLoc){
+                perLocSortable.push([loc, perLoc[loc]]);
+           }
+           perLocSortable.sort(function(a,b) {
+                return b[1] - a[1];
+           });
+
+           // Place sorted values in arrays for plotting
+           let xLoc = [];
+           let yLoc = [];
+           perLocSortable.forEach((d) => {
+                xLoc.push(d[0]);
+                yLoc.push(d[1]);
+           })
+
+           //Prep some options and then chart location data
+            const locationData = {
+                labels: xLoc,
+                datasets: [{
+                    label: "Test",
+                    data: yLoc,
+                    backgroundColor: "#586575"
+                }]
+            };
+            new Chart("locationTweets", {
+                type: 'horizontalBar',
+                data: locationData,
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                              beginAtZero: true
+                            }
+                        }],
+                        xAxes:[{
+                            gridLines:{
+                                drawOnChartArea: false,
+                                color: "#000000"
+                            }
+                        }],
+                        yAxes: [{
+                           stacked: true,
+                           gridLines:{
+                            drawOnChartArea:false,
+                            color: "#000000"
+                           }
+                        }]
+                    }
+                }
+            });
+            
     });
 
 // Anychart format of data 
