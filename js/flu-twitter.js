@@ -1,13 +1,34 @@
 let weeklyTweetsDisp = document.querySelector(".weeklyTweets");
 let weeklyChangeDisp = document.querySelector(".weeklyChange");
-let weeklyUserDisp = document.querySelector(".weeklyUsers");
+let totalTweetsDisp = document.querySelector(".totalTweets");
 
+let weeklyUsersDisp = document.querySelector(".weeklyUsers");
+let weeklyUserChange = document.querySelector(".weeklyUserChange");
+let totalUserDisp = document.querySelector(".totalUsers");
+let topUserN = document.querySelector(".topN");
+
+let weeklyLocationsDisp = document.querySelector(".weeklyLocations");
+let weeklyLocationsChange = document.querySelector(".weeklyLocationChange");
+let totalLocations = document.querySelector(".totalLocations");
+
+// ******** Functions used throughout
+// Function to count unique values in array of objects
+const uniqueItems = (list, keyFn) => list.reduce((resultSet, item) =>
+resultSet.add(typeof keyFn === 'string' ? item[keyFn] : keyFn(item)),new Set).size;
+
+// Title case is prettier
+function titleCase(str) {
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+    }
+    return splitStr.join(' '); 
+}
 
 fetch('/src/dailyTweets.json')
         .then(response => response.json())
         .then(dailyData => {
-
-            // Get daily count of tweets
+            // ************ Daily aggregatation *********
             let perDay = new Object();
             dailyData.forEach((d) => {
                 perDay[d.dateStr] = perDay[d.dateStr] ? ++perDay[d.dateStr]:1;
@@ -27,56 +48,44 @@ fetch('/src/dailyTweets.json')
                 return currDate >= weekStart;
                 
             });
-
             // Filtered array of last week
             const lastWeek = dailyData.filter(function(itm){
                 currDate = new Date(itm.dateStr);
                 return currDate >= priorweekStart && currDate <=weekStart;
                 
             });
+            
+            // Data for tweet count section
+            const xTweets = Object.keys(perDay);
+            const yTweets = Object.values(perDay);
 
-            // Function to count unique values in array of objects
-            const uniqueItems = (list, keyFn) => list.reduce((resultSet, item) =>
-                resultSet.add(typeof keyFn === 'string' ? item[keyFn] : keyFn(item)),new Set).size;
+            // ************ User aggregatation *********
 
-            weeklyTweetsDisp.textContent = thisWeek.length;
-            weeklyChangeDisp.textContent = thisWeek.length - lastWeek.length;
-            weeklyUserDisp.textContent = uniqueItems(thisWeek, 'screen_name');
+            let perUser = new Object();
+            dailyData.forEach((d) => {
+                perUser[d.screen_name] = perUser[d.screen_name] ? ++perUser[d.screen_name]:1;
+            })
 
-
-            const x = Object.keys(perDay);
-            const y = Object.values(perDay);
-            new Chart("dailyTweets", {
-                type: "line",
-                data: {
-                  labels: x,
-                  datasets: [{
-                    fill: true,
-                    lineTension: 0.5,
-                    backgroundColor: "#586575",
-                    data: y
-                  }]
-                },
-                options: {
-                    scales:{
-                        xAxes:[{
-                            gridLines:{
-                                drawOnChartArea: false,
-                                color: "#000000"
-                            }
-                        }],
-                        yAxes:[{
-                            gridLines: {
-                                drawOnChartArea: false,
-                                color: "#000000"
-                            }
-                        }]
-                    },
-                    legend: {display: false},
+            let perUserSortable = [];
+            for (let user in perUser){
+                if(perUser[user]>=15) {
+                    perUserSortable.push([user, perUser[user]]);
                 }
+           };
+           // Sorting the array of arrays
+            perUserSortable.sort(function(a,b) {
+                return b[1] - a[1];
             });
 
-           // Clean up some of the locations
+            const xUser = [];
+            const yUser = [];
+            perUserSortable.forEach((d) => {
+                xUser.push(d[0]);
+                yUser.push(d[1]);
+            })
+
+            // ************ Location aggregatation *********
+            // Clean up some of the locations
             dailyData.forEach((d) => {
                 if (d.location) {
                    d.location = d.location.toLowerCase();
@@ -99,35 +108,114 @@ fetch('/src/dailyTweets.json')
                perLoc[d.location] = perLoc[d.location] ? ++perLoc[d.location]:1;
            })
 
-           // Allow object to be sorted 
+           // Allow object to be sorted, and filter for more frequenct locations
            let perLocSortable = [];
            for (let loc in perLoc){
-                perLocSortable.push([loc, perLoc[loc]]);
+                if(perLoc[loc]>=5) {
+                    perLocSortable.push([loc, perLoc[loc]]);
+                }
            }
+           // Sorting the array of arrays
            perLocSortable.sort(function(a,b) {
                 return b[1] - a[1];
            });
 
-           // Place sorted values in arrays for plotting
+           // Data for location count section
            let xLoc = [];
            let yLoc = [];
            perLocSortable.forEach((d) => {
-                xLoc.push(d[0]);
+                xLoc.push(titleCase(d[0]));
                 yLoc.push(d[1]);
            })
+            //*************** Display key banners *************
+            //Tweets
+            weeklyTweetsDisp.textContent = thisWeek.length;
+            weeklyChangeDisp.textContent = thisWeek.length - lastWeek.length;
+            totalTweetsDisp.textContent = dailyData.length;
+            //Users
+            weeklyUsersDisp.textContent = uniqueItems(thisWeek, 'screen_name');
+            weeklyUserChange.textContent = uniqueItems(thisWeek, 'screen_name') - uniqueItems(lastWeek, 'screen_name')
+            totalUserDisp.textContent = uniqueItems(dailyData, "screen_name");
+            topUserN.textContent = xUser.length;
+            
+            //Locations
+            weeklyLocationsDisp.textContent = uniqueItems(thisWeek,'location');
+            weeklyLocationsChange.textContent = uniqueItems(thisWeek,'location') - uniqueItems(lastWeek, 'location');
+            totalLocations.textContent = uniqueItems(dailyData, 'location');
+           
 
-           //Prep some options and then chart location data
-            const locationData = {
-                labels: xLoc,
-                datasets: [{
-                    label: "Test",
-                    data: yLoc,
-                    backgroundColor: "#586575"
-                }]
-            };
+
+            new Chart("dailyTweets", {
+                type: "line",
+                data: {
+                  labels: xTweets,
+                  datasets: [{
+                    label: "Tweets",
+                    fill: true,
+                    lineTension: 0.5,
+                    backgroundColor: "#586575",
+                    pointHoverRadius: 8,
+                    pointHoverBackgroundColor: "#323f4f",
+                    data: yTweets
+                  }]
+                },
+                options: {
+                    scales:{
+                        xAxes:[{
+                            ticks: {
+                                fontColor: "#002b36",
+                                fontSize: 12
+                              },
+                            gridLines:{
+                                drawOnChartArea: false,
+                                color: "#000000"
+                            }
+                        }],
+                        yAxes:[{
+                            ticks: {
+                                fontColor: "#002b36",
+                                fontSize: 14
+                              },
+                            gridLines: {
+                                drawOnChartArea: false,
+                                color: "#000000"
+                            }
+                        }]
+                    },
+                    legend: {display: false},
+                }
+            });
+            
+            
+            new Chart("top-users", {
+                type: 'polarArea',
+                data: {
+                    labels: xUser,
+                    datasets: [{
+                        label: "Tweets",
+                        data: yUser,
+                        backgroundColor: "rgba(12, 104, 88,0.7)",
+                        hoverBackgroundColor: "rgba(12, 104, 88)",
+                    }]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    }
+                }
+            });
+
             new Chart("locationTweets", {
                 type: 'horizontalBar',
-                data: locationData,
+                data: {
+                    labels: xLoc,
+                    datasets: [{
+                        label: "Tweets",
+                        data: yLoc,
+                        backgroundColor: "rgba(63, 36, 53,0.7)",
+                        hoverBackgroundColor: "rgba(63, 36, 53)"
+                    }]
+                },
                 options: {
                     legend: {
                         display: false
@@ -135,16 +223,21 @@ fetch('/src/dailyTweets.json')
                     scales: {
                         xAxes: [{
                             ticks: {
-                              beginAtZero: true
-                            }
-                        }],
-                        xAxes:[{
+                              beginAtZero: true,
+                              fontColor: "#002b36",
+                              fontSize: 14
+                            },
                             gridLines:{
                                 drawOnChartArea: false,
                                 color: "#000000"
                             }
                         }],
                         yAxes: [{
+                            ticks: {    
+                                beginAtZero: true,
+                                fontColor: "#002b36",
+                                fontSize: 12
+                            },
                            stacked: true,
                            gridLines:{
                             drawOnChartArea:false,
@@ -156,10 +249,3 @@ fetch('/src/dailyTweets.json')
             });
             
     });
-
-// Anychart format of data 
-// const want2 = Object.keys(perDay).map((key) => ({
-//     day : key,
-//     count : perDay[key]
-// }));
-

@@ -10,30 +10,76 @@
     <title>Flu Twitter</title>
 </head>
 <body>
-    <div class="banner">
-        <div class="banner-item">
-            <h2>Weekly Tweets</h2>
-            <h1 class="weeklyTweets">#</h1>
+    <br>
+    <hr>
+    <div class="tweetCounts">
+        <div class="banner">
+            <div class="banner-item">
+                <h2>Weekly Tweets</h2>
+                <h1 class="weeklyTweets">#</h1>
+            </div>
+            <div class="banner-item">
+                <h2>Weekly Change</h2>
+                <h1 class="weeklyChange">#</h1>
+            </div>
+            <div class="banner-item">
+                <h2>Total Tweets</h2>
+                <h1 class="totalTweets">#</h1>
+            </div>
         </div>
-        <div class="banner-item">
-            <h2>Weekly Change</h2>
-            <h1 class="weeklyChange">#</h1>
+        <br>
+        <div class="dailyGraph">
+            <h2>Number of Daily Flu Tweets in Maritimes-ish</h2>
+            <canvas class="dailyGraph-viz" id="dailyTweets"></canvas>
         </div>
-        <div class="banner-item">
-            <h2>Weekly Users</h2>
-            <h1 class="weeklyUsers">#</h1>
-        </div>
-    </div>
-   
-    <div class="dailyGraph">
-        <h2>Number of Daily Tweets in Nova Scotia Containing Flu or Influenza</h2>
-        <canvas class="dailyGraph-viz" id="dailyTweets"></canvas>
     </div>
     <br>
-    <div class="locationGraph">
-        <h2>Number of Tweets by User Entered Location</h2>
-        <canvas class="locationGraph-viz" id="locationTweets"></canvas>
+    <hr>
+    <br>
+    <div class="usersSection">
+        <div class="banner">
+            <div class="banner-item-users">
+                <h2>Weekly Users</h2>
+                <h1 class="weeklyUsers">#</h1>
+            </div>
+            <div class="banner-item-users">
+                <h2>Weekly Change</h2>
+                <h1 class="weeklyUserChange">#</h1>
+            </div>
+            <div class="banner-item-users">
+                <h2>Total Users</h2>
+                <h1 class="totalUsers">#</h1>
+            </div>
+        </div>
+        <div class="userVisual">
+            <h1>Top <span class="topN">n</span> Users with Flu Tweets</h1>
+            <canvas class="userTop-viz" id="top-users"></canvas>
+        </div>
+        <br>
     </div>
+    <hr>
+    <br>
+    <div class="locationSection">
+        <div class="banner">
+            <div class="banner-item-loc">
+                <h2>Weekly Locations</h2>
+                <h1 class="weeklyLocations">#</h1>
+            </div>
+            <div class="banner-item-loc">
+                <h2>Weekly Change</h2>
+                <h1 class="weeklyLocationChange">#</h1>
+            </div>
+            <div class="banner-item-loc">
+                <h2>Total Locations</h2>
+                <h1 class="totalLocations">#</h1>
+            </div>
+        </div>
+        <br>
+        <div class="locationGraph">
+            <h2>Number of Tweets by Locations with &#8805 5 Tweets</h2>
+            <canvas class="locationGraph-viz" id="locationTweets"></canvas>
+        </div>
+    </div>      
     <br>
     <a href="/index.html">Home</a>
     <script src="/js/flu-twitter.js"></script>
