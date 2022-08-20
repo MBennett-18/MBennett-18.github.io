@@ -64,6 +64,24 @@ body,html {
     justify-content: center;
   }
 
+  .userVisual{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  }
+  .totalUserTop{
+    float:left;
+    width: 50%;
+
+  }
+
+  .totalUserWeek{
+    float:right;
+    width: 50%;
+
+  }
+
   @media  (max-width:800px) {
     h1{
       font-size: 18px;

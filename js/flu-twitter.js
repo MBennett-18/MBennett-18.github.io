@@ -7,6 +7,8 @@ let weeklyUserChange = document.querySelector(".weeklyUserChange");
 let totalUserDisp = document.querySelector(".totalUsers");
 let topUserN = document.querySelector(".topN");
 
+let topUserNWeek = document.querySelector(".topN-week");
+
 let weeklyLocationsDisp = document.querySelector(".weeklyLocations");
 let weeklyLocationsChange = document.querySelector(".weeklyLocationChange");
 let totalLocations = document.querySelector(".totalLocations");
@@ -65,23 +67,45 @@ fetch('/src/dailyTweets.json')
             dailyData.forEach((d) => {
                 perUser[d.screen_name] = perUser[d.screen_name] ? ++perUser[d.screen_name]:1;
             })
+            let perUserWeek = new Object();
+            thisWeek.forEach((d) => {
+                perUserWeek[d.screen_name] = perUserWeek[d.screen_name] ? ++perUserWeek[d.screen_name]:1;
+            })
 
             let perUserSortable = [];
+            let perUserSortWeek = [];
             for (let user in perUser){
                 if(perUser[user]>=15) {
                     perUserSortable.push([user, perUser[user]]);
                 }
            };
+           for (let user in perUserWeek){
+                if(perUser[user]>=8) {
+                    perUserSortWeek.push([user, perUser[user]]);
+            }
+            };
            // Sorting the array of arrays
             perUserSortable.sort(function(a,b) {
                 return b[1] - a[1];
             });
+            // Sorting the array of arrays
+            perUserSortWeek.sort(function(a,b) {
+                return b[1] - a[1];
+            });
+
+            console.log(perUserSortWeek);
 
             const xUser = [];
             const yUser = [];
             perUserSortable.forEach((d) => {
                 xUser.push(d[0]);
                 yUser.push(d[1]);
+            })
+            const xUserWeek = [];
+            const yUserWeek = []
+            perUserSortWeek.forEach((d) => {
+                xUserWeek.push(d[0]);
+                yUserWeek.push(d[1]);
             })
 
             // ************ Location aggregatation *********
@@ -137,6 +161,7 @@ fetch('/src/dailyTweets.json')
             weeklyUserChange.textContent = uniqueItems(thisWeek, 'screen_name') - uniqueItems(lastWeek, 'screen_name')
             totalUserDisp.textContent = uniqueItems(dailyData, "screen_name");
             topUserN.textContent = xUser.length;
+            topUserNWeek.textContent = xUserWeek.length;
             
             //Locations
             weeklyLocationsDisp.textContent = uniqueItems(thisWeek,'location');
@@ -194,6 +219,24 @@ fetch('/src/dailyTweets.json')
                     datasets: [{
                         label: "Tweets",
                         data: yUser,
+                        backgroundColor: "rgba(12, 104, 88,0.7)",
+                        hoverBackgroundColor: "rgba(12, 104, 88)",
+                    }]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    }
+                }
+            });
+
+            new Chart("top-users-week", {
+                type: 'polarArea',
+                data: {
+                    labels: xUserWeek,
+                    datasets: [{
+                        label: "Tweets",
+                        data: yUserWeek,
                         backgroundColor: "rgba(12, 104, 88,0.7)",
                         hoverBackgroundColor: "rgba(12, 104, 88)",
                     }]
