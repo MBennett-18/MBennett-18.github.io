@@ -15,26 +15,35 @@
     <h1>The Process</h1>
     <section class="process-section">
         <div class="container-data">
-            <div class="sources--cms">
-                <h2><i class="fa-brands fa-twitter"></i><i class="fa-solid fa-arrow-right-arrow-left fa-fw"></i><i class="fa-brands fa-python"></i></h2>
+            <div class="data-no-hover">
+                <h2><i class="fa-brands fa-twitter"></i><i class="fa-solid fa-arrow-right fa-fw"></i><i class="fa-brands fa-python"></i></h2>
             </div>
-        </div>
+            <div class="data-hover">
+                <p>A Python script, run off a Raspberry Pi, uses the Tweepy API to gather tweets, and is run each morning. </p>
+            </div>
+        </div> 
 
         <svg >
         <line x1="0" x2="600" y1="45" y2="45"/>
         </svg>
 
         <div class="container-storage">
-            <div class="sources--cms">
+            <div class="storage-no-hover">
                 <h2><i class="fa-brands fa-raspberry-pi"></i><i class="fa-solid fa-arrow-right fa-fw"></i><i class="fa-brands fa-aws"></i></h2>
+            </div>
+            <div class="storage-hover">
+                <p>The output JSON file is stored locally on the Pi, and also pushed to an AWS bucket, with read-level ACL settings. </p>
             </div>
         </div>
         <svg >
             <line x1="0" x2="600" y1="45" y2="45"/>
             </svg>
             <div class="container-display">
-                <div class="sources--cms">
+                <div class="display-no-hover">
                     <h2><i class="fa-brands fa-square-js"></i><i class="fa-solid fa-arrow-right fa-fw"></i><i class="fa-solid fa-chart-column"></i></h2>
+                </div>
+                <div class="display-hover">
+                    <p>The client-side Javascript then fetches the JSON with a GET command, and displays the daily updated tweet data using chart.js. </p>
                 </div>
             </div>
     </section>
