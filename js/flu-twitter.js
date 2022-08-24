@@ -213,6 +213,19 @@ fetch('https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyTweets.json
                 }]
             },
             options: {
+                onClick(event, elements){
+                    if(elements.length===1){
+                        const selected = xUser[elements[0]._index];
+                        window.open(`https://twitter.com/${selected}`)
+                    }
+                },
+                hover: {
+                    onHover: function(e) {
+                       var point = this.getElementAtEvent(e);
+                       if (point.length) e.target.style.cursor = 'pointer';
+                       else e.target.style.cursor = 'default';
+                    }
+                 },
                 legend: {
                     display: false
                 }
@@ -230,6 +243,19 @@ fetch('https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyTweets.json
                 }]
             },
             options: {
+                onClick(event, elements){
+                    if(elements.length===1){
+                        const selected = xUserWeek[elements[0]._index];
+                        window.open(`https://twitter.com/${selected}`)
+                    }
+                },
+                hover: {
+                    onHover: function(e) {
+                       var point = this.getElementAtEvent(e);
+                       if (point.length) e.target.style.cursor = 'pointer';
+                       else e.target.style.cursor = 'default';
+                    }
+                 },
                 legend: {
                     display: false
                 }
@@ -276,5 +302,7 @@ fetch('https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyTweets.json
                     }]
                 }
             }
-        });     
+        });   
+
     });
+
