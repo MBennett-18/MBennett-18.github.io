@@ -63,48 +63,47 @@ fetch('https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyTweets.json
         const yTweets = Object.values(perDay);
 
         // ************ User aggregatation *********
+        //*** Starting with overall user counts */
         let perUser = new Object();
         dailyData.forEach((d) => {
             perUser[d.screen_name] = perUser[d.screen_name] ? ++perUser[d.screen_name]:1;
         })
-        let perUserWeek = new Object();
-        thisWeek.forEach((d) => {
-            perUserWeek[d.screen_name] = perUserWeek[d.screen_name] ? ++perUserWeek[d.screen_name]:1;
-        })
-
         let perUserSortable = [];
-        let perUserSortWeek = [];
         for (let user in perUser){
             if(perUser[user]>=15) {
                 perUserSortable.push([user, perUser[user]]);
             }
         };
-        for (let user in perUserWeek){
-            if(perUser[user]>=8) {
-                perUserSortWeek.push([user, perUser[user]]);
-        }
-        };
-
         perUserSortable.sort(function(a,b) {
             return b[1] - a[1];
         });
-        perUserSortWeek.sort(function(a,b) {
-            return b[1] - a[1];
-        });
-
         const xUser = [];
         const yUser = [];
         perUserSortable.forEach((d) => {
             xUser.push(d[0]);
             yUser.push(d[1]);
         })
+
+        //***Now doing for this week counts 
+        let perUserWeek = new Object();
+        thisWeek.forEach((d) => {
+            perUserWeek[d.screen_name] = perUserWeek[d.screen_name] ? ++perUserWeek[d.screen_name]:1;
+        })
+        let perUserSortWeek = [];
+        for (let user in perUserWeek){
+            if(perUserWeek[user]>=2) {
+                perUserSortWeek.push([user, perUserWeek[user]]);
+        }
+        };
+        perUserSortWeek.sort(function(a,b) {
+            return b[1] - a[1];
+        });
         const xUserWeek = [];
         const yUserWeek = []
         perUserSortWeek.forEach((d) => {
             xUserWeek.push(d[0]);
             yUserWeek.push(d[1]);
         })
-
         // ************ Location aggregatation *********
         dailyData.forEach((d) => {
             if (d.location) {
@@ -121,7 +120,6 @@ fetch('https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyTweets.json
                 }
             }
         })
-
         // Count tweets by location
         let perLoc = new Object();
         dailyData.forEach((d) => {
