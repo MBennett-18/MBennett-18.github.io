@@ -102,11 +102,11 @@ navigator.geolocation.getCurrentPosition(position => {
               CSS.textContent = color4.style.color;
               CSS.textContent = color5.style.color;
               //Hover over for hex code
-              color1.title = hexArr[0];
-              color2.title = hexArr[1];
-              color3.title = hexArr[2];
-              color4.title = hexArr[3];
-              color5.title = hexArr[4];
+              color1.textContent = hexArr[0];
+              color2.textContent = hexArr[1];
+              color3.textContent = hexArr[2];
+              color4.textContent = hexArr[3];
+              color5.textContent = hexArr[4];
             });
         });
     });

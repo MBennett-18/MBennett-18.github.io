@@ -216,7 +216,7 @@ fetch('https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyTweets.json
                 onClick(event, elements){
                     if(elements.length===1){
                         const selected = xUser[elements[0]._index];
-                        window.open(`https://twitter.com/${selected}`)
+                        winow.open(`https://twitter.com/${selected}`)
                     }
                 },
                 hover: {
