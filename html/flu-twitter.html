@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="/css/styles.css"/> -->
     <link rel="stylesheet" href="/css/flu-twitter.css"/>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -30,9 +29,22 @@
                     <p>A Python script, run off a Raspberry Pi, uses the Tweepy API to gather tweets, and is run each morning. </p>
                 </div>
             </div> 
+
+            <svg viewBox="0 0 100 100">
+                <line x1="50%" x2="50%" y1="0%" y2="100%"/>
+            </svg>
+
+            <div class="container-analysis">
+                <div class="analysis-no-hover">
+                    <h2><i class="fa-brands fa-r-project"></i><i class="fa-solid fa-arrow-right fa-fw"></i><i class="fa-solid fa-laptop-code"></i></h2>
+                </div>
+                <div class="analysis-hover">
+                    <p>The tweets are analyzed using R to gain insights into tweet sentiment and word patterns. R scripts are run daily for analysis of new tweets.</p>
+                </div>
+            </div>
     
             <svg viewBox="0 0 100 100">
-                <line x1="50%" x2="50%" y1="0" y2="100"/>
+                <line x1="50%" x2="50%" y1="0%" y2="100%"/>
             </svg>
     
             <div class="container-storage">
@@ -40,7 +52,7 @@
                     <h2><i class="fa-brands fa-raspberry-pi"></i><i class="fa-solid fa-arrow-right fa-fw"></i><i class="fa-brands fa-aws"></i></h2>
                 </div>
                 <div class="storage-hover">
-                    <p>The output JSON file is stored locally on the Pi, and also pushed to an AWS bucket, with read-level ACL settings. </p>
+                    <p>The output JSON files for the tweets and analysis are stored locally on the Pi, and also pushed to an AWS bucket, with read-level ACL settings. </p>
                 </div>
             </div>
             <svg viewBox="0 0 100 100">
@@ -55,12 +67,91 @@
                     </div>
                 </div>
         </section>
-
         <section id="contentData" class="tab-content">
+            <!-- <select id="selectBoxDisease">
+                <option value="1" selected="selected">Influenza</option>
+                <option value="2" >COVID</option>
+            </select> -->
+            <div class="tweetCounts">
+                <div class="banner">
+                    <div class="banner-item">
+                        <h2>Weekly Tweets</h2>
+                        <h1 class="weeklyTweets">#</h1>
+                    </div>
+                    <div class="banner-item">
+                        <h2>Weekly Change</h2>
+                        <h1 class="weeklyChange">#</h1>
+                    </div>
+                    <div class="banner-item">
+                        <h2>Total Tweets</h2>
+                        <h1 class="totalTweets">#</h1>
+                    </div>
+                </div>
+                <br>
+                <div class="dailyGraph">
+                    <h2 id="dailyTitle">Number of Daily Flu Tweets in Maritimes-ish</h2>
+                    <canvas class="dailyGraph-viz" id="dailyTweets"></canvas>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="usersSection">
+                <div class="banner">
+                    <div class="banner-item-users">
+                        <h2>Weekly Users</h2>
+                        <h1 class="weeklyUsers">#</h1>
+                    </div>
+                    <div class="banner-item-users">
+                        <h2>Weekly Change</h2>
+                        <h1 class="weeklyUserChange">#</h1>
+                    </div>
+                    <div class="banner-item-users">
+                        <h2>Total Users</h2>
+                        <h1 class="totalUsers">#</h1>
+                    </div>
+                </div>
+                <br>
+                <div class="userVisual">
+                    <div class="totalUserTop">
+                        <h2>Top <span class="topN">n</span> Users with Flu Tweets</h2>
+                        <canvas class="userTop-viz" id="top-users"></canvas>
+                     </div>
+                     <div class="totalUserWeek">
+                        <h2>Top <span class="topN-week">n</span> Weekly Users with Flu Tweets</h2>
+                        <canvas class="userTop-viz-week" id="top-users-week"></canvas>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="locationSection">
+                <div class="banner">
+                    <div class="banner-item-loc">
+                        <h2>Weekly Locations</h2>
+                        <h1 class="weeklyLocations">#</h1>
+                    </div>
+                    <div class="banner-item-loc">
+                        <h2>Weekly Change</h2>
+                        <h1 class="weeklyLocationChange">#</h1>
+                    </div>
+                    <div class="banner-item-loc">
+                        <h2>Total Locations</h2>
+                        <h1 class="totalLocations">#</h1>
+                    </div>
+                </div>
+                <br>
+                <div class="locationGraph">
+                    <h2>Number of Tweets by Locations with &#8805 5 Tweets</h2>
+                    <canvas class="locationGraph-viz" id="locationTweets"></canvas>
+                </div>
+            </div>  
         </section>
-
         <section id="contentAnalysis" class="tab-content">
         </section>
     </div>
+    <script src="/js/flu-twitter.js"></script>
 </body>
 </html>

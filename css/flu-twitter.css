@@ -3,6 +3,8 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
     font-family: sans-serif;
+    margin: 0;
+    padding: 0;      
 }
 
 .tab_container {
@@ -26,29 +28,26 @@ label {
     padding: 1.5em;
     color: #757575;
     cursor: pointer;
-    text-decoration: none;
     text-align: center;
-    background: #f0f0f0;
+    background: #e8e8e8;
 }
 
 #tab1:checked ~ #contentProcess,
 #tab2:checked ~ #contentData,
 #tab3:checked ~ #contentAnalysis{
     display: inline;
-    padding: 50px 20px 20px 20px;
+    padding: 0px 20px 20px 20px;
     background: #fff;
-    color: #999;
-    border-bottom: 2px solid  #f0f0f0;
 }
-
 
 .tab_container [id^="tab"]:checked + label {
     background: #fff;
     box-shadow: inset 0 3px #0CE;
+    color: #3a5f77;
 }
 
   .tab_container [id^="tab"]:checked + label .fa {
-    color: #0CE;
+    color: rgb(0, 85, 100);
   }
 
   @media only screen and (max-width: 900px) {
@@ -56,11 +55,13 @@ label {
       display: none;
     }
   }
-
-  /* Down here is within tab formatting */
+  /*************************************/
+  /* Process Tab styles */
+  /*************************************/
 .container-data:before,
 .container-storage:before,
-.container-display:before{
+.container-display:before,
+.container-analysis:before{
     position: absolute;
     left: 10;
     bottom: 103%;
@@ -74,21 +75,25 @@ label {
   
 .container-data,
 .container-storage,
-.container-display {
+.container-display,
+.container-analysis {
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
     display: flex;
     border-radius: 8px;
     padding: 1rem;
     background: #3a5f77;
     position: relative;
-    width: 80%;
+    width: 60%;
+    max-width: 800px;
     transition: 0.25s ease;
 }
   
 .container-data div,
 .container-storage div,
-.container-display div{
+.container-display div,
+.container-analysis div{
     background: #fff;
     padding: 5px;
     border-radius: 4px;
@@ -96,10 +101,15 @@ label {
     width: 100%;
     text-align: center;
 }
-  
+.container-data:before {content: 'data';}
+.container-analysis:before {content: 'analysis';}
+.container-storage:before {content: 'storage';}
+.container-display:before{content: "display"}
+
 #contentProcess svg{
     height: 5rem;
     width: 100%;
+    z-index: -1;
 }
 
 #contentProcess i{
@@ -115,73 +125,144 @@ label {
     animation: animateline 5s linear both infinite;
 }
   
-.container-data:before {
-content: 'data';
-}
-.container-storage:before {
-content: 'storage';
-}
-.container-display:before{
-content: "display"
-}
-
 /* process hovering animation */
 .data-hover,
 .storage-hover,
-.display-hover{
+.display-hover,
+.analysis-hover{
     display:none
 }
 
 .container-data:hover > .data-hover,
 .container-storage:hover > .storage-hover,
-.container-display:hover > .display-hover{
+.container-display:hover > .display-hover,
+.container-analysis:hover > .analysis-hover{
     display:block;
     font-size: 18px;
 }
 
 .container-data:hover,
 .container-storage:hover,
-.container-display:hover{
+.container-display:hover,
+.container-analysis:hover{
     transform: translate(70px);
 }
 .container-data:hover > .data-no-hover,
 .container-storage:hover > .storage-no-hover,
-.container-display:hover > .display-no-hover{
-display:none;
+.container-display:hover > .display-no-hover,
+.container-analysis:hover > .analysis-no-hover{
+    display:none;
 }
 
-
+/* Dashed line animation */
 @-moz-keyframes animateline {
-from {stroke-dashoffset: 0;}
-to {stroke-dashoffset: -5rem;}
+    from {stroke-dashoffset: 0;}
+    to {stroke-dashoffset: -5rem;}
 }
-
 @-webkit-keyframes animateline {
-from {stroke-dashoffset: 0;}
-to {stroke-dashoffset: -5rem;}
+    from {stroke-dashoffset: 0;}
+    to {stroke-dashoffset: -5rem;}
 }
-
 @-o-keyframes animateline {
-from {stroke-dashoffset: 0;}
-to {stroke-dashoffset: -5rem;}
+    from {stroke-dashoffset: 0;}
+    to {stroke-dashoffset: -5rem;}
 }
-
 @keyframes animateline {
-from {stroke-dashoffset: 0;}
-to {stroke-dashoffset: -5rem;}
+    from {stroke-dashoffset: 0;}
+    to {stroke-dashoffset: -5rem;}
+}
+  /*************************************/
+  /* Data Tab styles */
+  /*************************************/
+
+#contentData{
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    overflow-y: scroll;
 }
 
-@media  (max-width:700px) {
-h1{
-    font-size: 18px;
+.banner {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
 }
-h2{
-    font-size: 16px;;
+  
+.banner-item {
+    color:white;
+    background: #002b36;
+    flex-basis: 220px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px;
+    padding: 10px;
+    box-shadow: 0 0 8px rgb(100, 100, 100);
 }
-.container-data:before,
-.container-storage:before,
-.container-display:before{
-    font-size: 0.7rem;
+  
+.banner-item-users {
+    color:white;
+    background: #0c6858;
+    flex-basis: 220px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px;
+    padding: 10px;
+    box-shadow: 0 0 8px rgb(100, 100, 100);
 }
+  
+.banner-item-loc {
+    color:white;
+    background: #3f2435;
+    flex-basis: 230px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px;
+    padding: 10px;
+    box-shadow: 0 0 8px rgb(100, 100, 100);
 }
 
+.dailyGraph{
+    text-align: center;
+
+}
+  
+.dailyGraph-viz{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+}
+.userVisual{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  }
+  .totalUserTop{
+    float:left;
+    width: 50%;
+  
+  }
+  
+  .totalUserWeek{
+    float:right;
+    width: 50%;
+  
+  }
+
+  @media only screen and (max-width: 900px) {
+    label span {
+      display: none;
+    }
+    h1{
+        font-size: 16px;
+    }
+    h2{
+        font-size: 14px;
+    }
+  }
