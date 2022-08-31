@@ -62,15 +62,20 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
         return currDate >= priorweekStart && currDate <=weekStart;
         
     });
-    // Data for tweet count section
-    const xTweets = Object.keys(perDay);
-    const yTweets = Object.values(perDay);
+
+    let dailyArray = []
+    for (let day in perDay){
+        dailyArray.push([day, perDay[day]]);
+    };
+
     // ************ User aggregatation *********
     //*** Starting with overall user counts */
     let perUser = new Object();
     dailyData.forEach((d) => {
         perUser[d.screen_name] = perUser[d.screen_name] ? ++perUser[d.screen_name]:1;
     })
+    
+    //Push top array so it can be sorted
     let perUserSortable = [];
     for (let user in perUser){
             perUserSortable.push([user, perUser[user]]);
@@ -78,19 +83,17 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     perUserSortable.sort(function(a,b) {
         return b[1] - a[1];
     });
-    const xUser = [];
-    const yUser = [];
-    perUserSortable.slice(0,Math.floor((perUserSortable.length)*0.02)).forEach((d) => {
-        xUser.push(d[0]);
-        yUser.push(d[1]);
-    })
-
+    //Put back in this format for charting
+   const perUserData = perUserSortable.slice(0,5).map(val =>({
+        'x': val[0],
+        'value': val[1]
+    }))
     //***Now doing for this week counts 
     let perUserWeek = new Object();
     thisWeek.forEach((d) => {
         perUserWeek[d.screen_name] = perUserWeek[d.screen_name] ? ++perUserWeek[d.screen_name]:1;
     })
-
+    
     let perUserSortWeek = [];
     for (let user in perUserWeek){
             perUserSortWeek.push([user, perUserWeek[user]]);
@@ -131,162 +134,75 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     let perLocSortable = [];
     for (let loc in perLoc){
         if(perLoc[loc]>=5) {
-            perLocSortable.push([loc, perLoc[loc]]);
+            perLocSortable.push([titleCase(loc), perLoc[loc]]);
         }
     };
     perLocSortable.sort(function(a,b) {
         return b[1] - a[1];
     });
-
-    let xLoc = [];
-    let yLoc = [];
-    perLocSortable.forEach((d) => {
-        xLoc.push(titleCase(d[0]));
-        yLoc.push(d[1]);
-    })
     //********************* Charting below *******************
-    new Chart("dailyTweets", {
-        type: "line",
-        data: {
-            labels: xTweets,
-            datasets: [{
-            label: "Tweets",
-            fill: true,
-            lineTension: 0.5,
-            backgroundColor: "#586575",
-            pointHoverRadius: 8,
-            pointHoverBackgroundColor: "#323f4f",
-            data: yTweets
-            }]
-        },
-        options: {
-            scales:{
-                xAxes:[{
-                    ticks: {
-                        fontColor: "#002b36",
-                        fontSize: 12
-                        },
-                    gridLines:{
-                        drawOnChartArea: false,
-                        color: "#000000"
-                    }
-                }],
-                yAxes:[{
-                    ticks: {
-                        fontColor: "#002b36",
-                        fontSize: 14
-                        },
-                    gridLines: {
-                        drawOnChartArea: false,
-                        color: "#000000"
-                    }
-                }]
-            },
-            legend: {display: false},
-        }
-    });
-    new Chart("top-users", {
-        type: 'polarArea',
-        data: {
-            labels: xUser,
-            datasets: [{
-                label: "Tweets",
-                data: yUser,
-                backgroundColor: "rgba(12, 104, 88,0.7)",
-                hoverBackgroundColor: "rgba(12, 104, 88)",
-            }]
-        },
-        options: {
-            onClick(event, elements){
-                if(elements.length===1){
-                    const selected = xUser[elements[0]._index];
-                    window.open(`https://twitter.com/${selected}`)
-                }
-            },
-            hover: {
-                onHover: function(e) {
-                var point = this.getElementAtEvent(e);
-                if (point.length) e.target.style.cursor = 'pointer';
-                else e.target.style.cursor = 'default';
-                }
-            },
-            legend: {
-                display: false
-            }
-        }
-    });
-    new Chart("top-users-week", {
-        type: 'polarArea',
-        data: {
-            labels: xUserWeek,
-            datasets: [{
-                label: "Tweets",
-                data: yUserWeek,
-                backgroundColor: "rgba(12, 104, 88,0.7)",
-                hoverBackgroundColor: "rgba(12, 104, 88)",
-            }]
-        },
-        options: {
-            onClick(event, elements){
-                if(elements.length===1){
-                    const selected = xUserWeek[elements[0]._index];
-                    window.open(`https://twitter.com/${selected}`)
-                }
-            },
-            hover: {
-                onHover: function(e) {
-                var point = this.getElementAtEvent(e);
-                if (point.length) e.target.style.cursor = 'pointer';
-                else e.target.style.cursor = 'default';
-                }
-            },
-            legend: {
-                display: false
-            }
-        }
-    });
-    new Chart("locationTweets", {
-        type: 'horizontalBar',
-        data: {
-            labels: xLoc,
-            datasets: [{
-                label: "Tweets",
-                data: yLoc,
-                backgroundColor: "rgba(63, 36, 53,0.7)",
-                hoverBackgroundColor: "rgba(63, 36, 53)"
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        fontColor: "#002b36",
-                        fontSize: 14
-                    },
-                    gridLines:{
-                        drawOnChartArea: false,
-                        color: "#000000"
-                    }
-                }],
-                yAxes: [{
-                    ticks: {    
-                        beginAtZero: true,
-                        fontColor: "#002b36",
-                        fontSize: 12
-                    },
-                    stacked: true,
-                    gridLines:{
-                    drawOnChartArea:false,
-                    color: "#000000"
-                    }
-                }]
-            }
-        }
-    });  
+
+    // ****** Per Location charting ********
+    dailyChart = anychart.area();
+    const dailySeries = dailyChart.splineArea(dailyArray);
+    // Settings
+    dailySeries.fill('#002b36');
+    dailySeries.stroke('#000000');
+    dailySeries.name("Tweets");
+    dailyChart.xAxis().labels().rotation(-45);
+    //Draw
+    dailyChart.container("dailyTweetsViz");
+    dailyChart.draw();
+
+    // ********* All users charting ********
+    // create data
+
+    
+      // create a chart
+      var chart = anychart.polar();
+      // create a column series and set the data
+      var series = chart.column(perUserData);
+      // set the type of the x-scale
+      chart.xScale("ordinal");
+      // enable sorting points by x
+      chart.sortPointsByX(true);
+      // set the inner radius
+      chart.innerRadius(50);
+      // set the chart title
+      chart.title("Polar Column Chart");
+      // set the container id
+      chart.container("allUsers");
+      // initiate drawing the chart
+      chart.draw();
+    
+      // create a chart
+      var chart = anychart.polar();
+      // create a column series and set the data
+      var series = chart.column(perUserData);
+      // set the type of the x-scale
+      chart.xScale("ordinal");
+      // enable sorting points by x
+      chart.sortPointsByX(true);
+      // set the inner radius
+      chart.innerRadius(50);
+      // set the chart title
+      chart.title("Polar Column Chart");
+      // set the container id
+      chart.container("weekUsers");
+      // initiate drawing the chart
+      chart.draw();
+ 
+    // ****** Per Location charting ********
+    locationChart = anychart.bar();
+    const locationSeries = locationChart.bar(perLocSortable);
+    // Settings
+    locationSeries.fill("#3f2435");
+    locationSeries.stroke("#000000");
+    locationSeries.name("Tweets");
+    //Draw
+    locationChart.container("locationGraphViz");
+    locationChart.draw();
+
             //*************** Display key banners *************
     //Tweets
     weeklyTweetsDisp.textContent = thisWeek.length;
@@ -296,8 +212,8 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     weeklyUsersDisp.textContent = uniqueItems(thisWeek, 'screen_name');
     weeklyUserChange.textContent = uniqueItems(thisWeek, 'screen_name') - uniqueItems(lastWeek, 'screen_name')
     totalUserDisp.textContent = uniqueItems(dailyData, "screen_name");
-    topUserN.textContent = xUser.length;
-    topUserNWeek.textContent = xUserWeek.length;
+    //topUserN.textContent = xUser.length;
+    //topUserNWeek.textContent = xUserWeek.length;
     //Locations
     weeklyLocationsDisp.textContent = uniqueItems(thisWeek,'location');
     weeklyLocationsChange.textContent = uniqueItems(thisWeek,'location') - uniqueItems(lastWeek, 'location');

@@ -227,16 +227,9 @@ label {
 
 .dailyGraph{
     text-align: center;
-
+    height: 600px;
 }
   
-.dailyGraph-viz{
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-
-}
 .userVisual{
     display: flex;
     align-items: center;
@@ -246,13 +239,11 @@ label {
   .totalUserTop{
     float:left;
     width: 50%;
-  
   }
   
   .totalUserWeek{
     float:right;
     width: 50%;
-  
   }
 
   @media only screen and (max-width: 900px) {
@@ -264,5 +255,8 @@ label {
     }
     h2{
         font-size: 14px;
+    }
+    #dailyTweetsViz{
+        /* height: 100px !important; */
     }
   }
