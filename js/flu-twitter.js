@@ -40,7 +40,7 @@ priorweekStart.setDate(priorweekStart.getDate()-14);
 //let apiDailyTweets = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyCovidTweets.json';
 let apiDailyTweets = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyTweets.json';
 let apiCorpus = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/fluCorpus.json';
-let apiSentiment = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyTweets.json';
+let apiSentiment = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/fluSentiment.json';
 
 fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
 .then(response => response.json())
@@ -215,6 +215,24 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
 fetch(apiCorpus,{method: "GET",mode: 'cors'})
 .then(response => response.json())
 .then(corpusData => {
+	 // console.log(corpusData[1]);
+	
+	//Change object keys to keys in anychart
+	const corpusKeyFormat = corpusData.map(e => ({x: e.word, value:e.n , category:e.sentiment}));
+	const corpusFormat = corpusKeyFormat.slice(1,100);
+
+	//Create chart and color scale
+	const corpusChart = anychart.tagCloud(corpusFormat);
+	const customColorScale = anychart.scales.ordinalColor();
+	//Settings
+	customColorScale.colors(["#6f6f6f", "#8a0000", "#3e733d"]);
+	corpusChart.angles([0,0]);
+	corpusChart.colorScale(customColorScale);
+	corpusChart.colorRange().enabled(true);
+	// Draw
+	corpusChart.container("corpusCloud");
+	corpusChart.draw();
+
     
 });
 
