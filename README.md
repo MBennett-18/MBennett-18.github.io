@@ -9,4 +9,4 @@ Inspiration for this layout came from w3 Schools and their CSS tutorials. The ta
 Inspiration for weather API learned from: https://www.youtube.com/watch?v=wPElVpR1rwA. Current weather conditions are grabbed and a color palette is generated based on weather conditions. 
 
 ## Flu Twitter
-A daily updated display of tweets containing key words about flu geolocated in the maritimes. Using Twitter's API the tweets are  collected, stored, and displayed. 
+A daily updated display of tweets containing key words about flu geolocated in the maritimes. Using Twitter's API the tweets are collected, stored, and displayed. Upcoming will be adding the ability to include tweets including COVID-19 content. 

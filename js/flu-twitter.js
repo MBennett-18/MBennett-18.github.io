@@ -101,13 +101,11 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     perUserSortWeek.sort(function(a,b) {
         return b[1] - a[1];
     });
- 
-    const xUserWeek = [];
-    const yUserWeek = []
-    perUserSortWeek.slice(0,Math.floor((perUserSortWeek.length)*0.1)).forEach((d) => {
-        xUserWeek.push(d[0]);
-        yUserWeek.push(d[1]);
-    })
+	//Put back in this format for charting
+	const perUserWeekData = perUserSortWeek.slice(0,5).map(val =>({
+	    'x': val[0],
+	    'value': val[1]
+	}))
 
     // ************ Location aggregatation *********
     dailyData.forEach((d) => {
@@ -142,8 +140,8 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     });
     //********************* Charting below *******************
 
-    // ****** Per Location charting ********
-    dailyChart = anychart.area();
+    // ****** Tweets per Day ********
+    const dailyChart = anychart.area();
     const dailySeries = dailyChart.splineArea(dailyArray);
     // Settings
     dailySeries.fill('#002b36');
@@ -154,46 +152,34 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     dailyChart.container("dailyTweetsViz");
     dailyChart.draw();
 
-    // ********* All users charting ********
-    // create data
-
-    
-      // create a chart
-      var chart = anychart.polar();
-      // create a column series and set the data
-      var series = chart.column(perUserData);
-      // set the type of the x-scale
-      chart.xScale("ordinal");
-      // enable sorting points by x
-      chart.sortPointsByX(true);
-      // set the inner radius
-      chart.innerRadius(50);
-      // set the chart title
-      chart.title("Polar Column Chart");
-      // set the container id
-      chart.container("allUsers");
-      // initiate drawing the chart
-      chart.draw();
-    
-      // create a chart
-      var chart = anychart.polar();
-      // create a column series and set the data
-      var series = chart.column(perUserData);
-      // set the type of the x-scale
-      chart.xScale("ordinal");
-      // enable sorting points by x
-      chart.sortPointsByX(true);
-      // set the inner radius
-      chart.innerRadius(50);
-      // set the chart title
-      chart.title("Polar Column Chart");
-      // set the container id
-      chart.container("weekUsers");
-      // initiate drawing the chart
-      chart.draw();
- 
+    // ***** All users charting ****
+	const allUsersChart = anychart.polar();
+	const allUsersSeries = allUsersChart.column(perUserData);
+	//SETTINGS
+	allUsersSeries.fill('#0c6858');
+	allUsersSeries.stroke('#000000');
+	allUsersChart.xScale("ordinal");
+	allUsersChart.sortPointsByX(true);
+	allUsersChart.innerRadius(50);
+	//Draw
+	allUsersChart.container("allUsers");
+	allUsersChart.draw();
+	
+	// **** Top weekly users ****
+	const weeklyUsersChart = anychart.polar();
+	const weeklyUsersSeries = weeklyUsersChart.column(perUserWeekData);
+	// Settings
+	weeklyUsersSeries.fill('#0c6858');
+	weeklyUsersSeries.stroke('#000000');
+	weeklyUsersChart.xScale("ordinal");
+	weeklyUsersChart.sortPointsByX(true);
+	weeklyUsersChart.innerRadius(50);
+	// Draw
+	weeklyUsersChart.container("weekUsers");
+	weeklyUsersChart.draw();
+	
     // ****** Per Location charting ********
-    locationChart = anychart.bar();
+    const locationChart = anychart.bar();
     const locationSeries = locationChart.bar(perLocSortable);
     // Settings
     locationSeries.fill("#3f2435");
