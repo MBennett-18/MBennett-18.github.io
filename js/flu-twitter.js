@@ -84,8 +84,8 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
         return b[1] - a[1];
     });
     //Put back in this format for charting
-	const allUserLength = Math.floor(perUserSortable.length*0.01);
-	const perUserData = perUserSortable.slice(0,allUserLength).map(val =>({
+    const allUserLength = Math.floor(perUserSortable.length*0.01);
+    const perUserData = perUserSortable.slice(0,allUserLength).map(val =>({
         'x': val[0],
         'value': val[1]
     }))
@@ -102,12 +102,12 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     perUserSortWeek.sort(function(a,b) {
         return b[1] - a[1];
     });
-	//Put back in this format for charting
-	const weekUserLength = Math.floor(perUserSortWeek.length*0.09);
-	const perUserWeekData = perUserSortWeek.slice(0,weekUserLength).map(val =>({
-	    'x': val[0],
-	    'value': val[1]
-	}))
+    //Put back in this format for charting
+    const weekUserLength = Math.floor(perUserSortWeek.length*0.09);
+    const perUserWeekData = perUserSortWeek.slice(0,weekUserLength).map(val =>({
+        'x': val[0],
+        'value': val[1]
+    }))
 
     // ************ Location aggregatation *********
     dailyData.forEach((d) => {
@@ -122,7 +122,7 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
             }else if(d.location.includes('the ocean')){
                 d.location = 'the ocean';
             }else if(d.location.includes('cole harbour')){
-				d.location = 'cole harbour';
+                d.location = 'cole harbour';
             }
         }
     })
@@ -131,9 +131,9 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     dailyData.forEach((d) => {
         perLoc[d.location] = perLoc[d.location] ? ++perLoc[d.location]:1;
     })
-	//Get number of tweets per location to display
-	let counter;
-	apiDailyTweets === 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyCovidTweets.json'	? counter=1 : counter = 5
+    //Get number of tweets per location to display
+    let counter;
+    apiDailyTweets === 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyCovidTweets.json'	? counter=1 : counter = 5
     let perLocSortable = [];
     for (let loc in perLoc){
         if(perLoc[loc]>=counter) {
@@ -158,32 +158,32 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     dailyChart.draw();
 
     // ***** All users charting ****
-	const allUsersChart = anychart.polar();
-	const allUsersSeries = allUsersChart.column(perUserData);
-	//SETTINGS
-	allUsersSeries.fill('#0c6858');
-	allUsersSeries.stroke('#000000');
-	allUsersChart.xScale("ordinal");
-	allUsersChart.sortPointsByX(true);
-	allUsersChart.innerRadius(50);
-	//Draw
-	allUsersChart.container("allUsers");
-	allUsersChart.draw();
-	
-	// **** Top weekly users ****
-	const weeklyUsersChart = anychart.polar();
-	const weeklyUsersSeries = weeklyUsersChart.column(perUserWeekData);
-	// Settings
-	weeklyUsersSeries.fill('#0c6858');
-	weeklyUsersSeries.stroke('#000000');
-	weeklyUsersChart.xScale("ordinal");
-	weeklyUsersChart.yScale().ticks().interval(3);
-	weeklyUsersChart.sortPointsByX(true);
-	weeklyUsersChart.innerRadius(50);
-	// Draw
-	weeklyUsersChart.container("weekUsers");
-	weeklyUsersChart.draw();
-	
+    const allUsersChart = anychart.polar();
+    const allUsersSeries = allUsersChart.column(perUserData);
+    //SETTINGS
+    allUsersSeries.fill('#0c6858');
+    allUsersSeries.stroke('#000000');
+    allUsersChart.xScale("ordinal");
+    allUsersChart.sortPointsByX(true);
+    allUsersChart.innerRadius(50);
+    //Draw
+    allUsersChart.container("allUsers");
+    allUsersChart.draw();
+    
+    // **** Top weekly users ****
+    const weeklyUsersChart = anychart.polar();
+    const weeklyUsersSeries = weeklyUsersChart.column(perUserWeekData);
+    // Settings
+    weeklyUsersSeries.fill('#0c6858');
+    weeklyUsersSeries.stroke('#000000');
+    weeklyUsersChart.xScale("ordinal");
+    weeklyUsersChart.yScale().ticks().interval(3);
+    weeklyUsersChart.sortPointsByX(true);
+    weeklyUsersChart.innerRadius(50);
+    // Draw
+    weeklyUsersChart.container("weekUsers");
+    weeklyUsersChart.draw();
+    
     // ****** Per Location charting ********
     const locationChart = anychart.bar();
     const locationSeries = locationChart.bar(perLocSortable);
@@ -195,7 +195,7 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     locationChart.container("locationGraphViz");
     locationChart.draw();
 
-            //*************** Display key banners *************
+    //*************** Display key banners *************
     //Tweets
     weeklyTweetsDisp.textContent = thisWeek.length;
     weeklyChangeDisp.textContent = thisWeek.length - lastWeek.length;
@@ -215,25 +215,21 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
 fetch(apiCorpus,{method: "GET",mode: 'cors'})
 .then(response => response.json())
 .then(corpusData => {
-	 // console.log(corpusData[1]);
-	
-	//Change object keys to keys in anychart
-	const corpusKeyFormat = corpusData.map(e => ({x: e.word, value:e.n , category:e.sentiment}));
-	const corpusFormat = corpusKeyFormat.slice(1,100);
-
-	//Create chart and color scale
-	const corpusChart = anychart.tagCloud(corpusFormat);
-	const customColorScale = anychart.scales.ordinalColor();
-	//Settings
-	customColorScale.colors(["#6f6f6f", "#8a0000", "#3e733d"]);
-	corpusChart.angles([0,0]);
-	corpusChart.colorScale(customColorScale);
-	corpusChart.colorRange().enabled(true);
-	// Draw
-	corpusChart.container("corpusCloud");
-	corpusChart.draw();
-
+    //Change object keys to keys in anychart
+    const corpusKeyFormat = corpusData.map(e => ({x: e.word, value:e.n , category:e.sentiment}));
+    const corpusFormat = corpusKeyFormat.slice(1,100);
     
+    //Create chart and color scale
+    const corpusChart = anychart.tagCloud(corpusFormat);
+    const customColorScale = anychart.scales.ordinalColor();
+    //Settings
+    customColorScale.colors(["#6f6f6f", "#8a0000", "#3e733d"]);
+    corpusChart.angles([0,0]);
+    corpusChart.colorScale(customColorScale);
+    corpusChart.colorRange().enabled(true);
+    // Draw
+    corpusChart.container("corpusCloud");
+    corpusChart.draw();    
 });
 
 
