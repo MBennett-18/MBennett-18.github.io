@@ -39,8 +39,9 @@ priorweekStart.setDate(priorweekStart.getDate()-14);
 
 //let apiDailyTweets = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyCovidTweets.json';
 let apiDailyTweets = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/dailyTweets.json';
-let apiCorpus = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/fluCorpus.json';
-let apiSentiment = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/fluSentiment.json';
+let apiFluCorpus = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/fluCorpus.json';
+let apiCovidCorpus = 'https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/covidCorpus.json';
+
 
 fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
 .then(response => response.json())
@@ -163,6 +164,7 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     //SETTINGS
     allUsersSeries.fill('#0c6858');
     allUsersSeries.stroke('#000000');
+    allUsersSeries.name("Tweets");
     allUsersChart.xScale("ordinal");
     allUsersChart.sortPointsByX(true);
     allUsersChart.innerRadius(50);
@@ -176,6 +178,7 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     // Settings
     weeklyUsersSeries.fill('#0c6858');
     weeklyUsersSeries.stroke('#000000');
+    weeklyUsersSeries.name("Tweets");
     weeklyUsersChart.xScale("ordinal");
     weeklyUsersChart.yScale().ticks().interval(3);
     weeklyUsersChart.sortPointsByX(true);
@@ -212,24 +215,27 @@ fetch(apiDailyTweets,{method: "GET",mode: 'cors'})
     totalLocations.textContent = uniqueItems(dailyData, 'location'); 
 });
 
-fetch(apiCorpus,{method: "GET",mode: 'cors'})
-.then(response => response.json())
-.then(corpusData => {
-    //Change object keys to keys in anychart
-    const corpusKeyFormat = corpusData.map(e => ({x: e.word, value:e.n , category:e.sentiment}));
-    const corpusFormat = corpusKeyFormat.slice(1,100);
-    
-    //Create chart and color scale
-    const corpusChart = anychart.tagCloud(corpusFormat);
-    const customColorScale = anychart.scales.ordinalColor();
-    //Settings
-    customColorScale.colors(["#6f6f6f", "#8a0000", "#3e733d"]);
-    corpusChart.angles([0,0]);
-    corpusChart.colorScale(customColorScale);
-    corpusChart.colorRange().enabled(true);
-    // Draw
-    corpusChart.container("corpusCloud");
-    corpusChart.draw();    
-});
+function createWordCloud(apiCorpus, htmlID){
+    fetch(apiCorpus,{method: "GET",mode: 'cors'})
+    .then(response => response.json())
+    .then(corpusData => {
+        //Change object keys to keys in anychart
+        const corpusKeyFormat = corpusData.map(e => ({x: e.word, value:e.n , category:e.sentiment}));
+        const corpusFormat = corpusKeyFormat.slice(0,100);
+        
+        //Create chart and color scale
+        const corpusChart = anychart.tagCloud(corpusFormat);
+        const customColorScale = anychart.scales.ordinalColor();
+        //Settings
+        customColorScale.colors(["#6f6f6f", "#8a0000", "#3e733d"]);
+        corpusChart.angles([0,0]);
+        corpusChart.colorScale(customColorScale);
+        corpusChart.colorRange().enabled(true);
+        // Draw
+        corpusChart.container(htmlID);
+        corpusChart.draw();    
+    });
+}
 
-
+createWordCloud(apiFluCorpus, 'fluCloud');
+createWordCloud(apiCovidCorpus, 'covidCloud');

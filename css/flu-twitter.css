@@ -79,7 +79,6 @@ label {
 .container-analysis {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
     display: flex;
     border-radius: 8px;
     padding: 1rem;
@@ -88,6 +87,10 @@ label {
     width: 60%;
     max-width: 800px;
     transition: 0.25s ease;
+}
+
+.container-data{
+    margin-top: 20px;
 }
   
 .container-data div,
@@ -102,7 +105,7 @@ label {
     text-align: center;
 }
 .container-data:before {content: 'data';}
-.container-analysis:before {content: 'analysis';}
+.container-analysis:before {content: 'analysis'; }
 .container-storage:before {content: 'storage';}
 .container-display:before{content: "display"}
 
@@ -244,6 +247,10 @@ label {
   .totalUserWeek{
     float:right;
     width: 50%;
+  }
+
+  #contentAnalysis{
+    text-align: center;
   }
 
   @media only screen and (max-width: 900px) {
