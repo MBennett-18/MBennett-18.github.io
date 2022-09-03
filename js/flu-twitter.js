@@ -45,6 +45,7 @@ const fetchedData = Promise.all([fetchDailyFlu, fetchDailyCovid]);
 function loadAndDisplay (dropdownIndex) {
     fetchedData.then((response) => {
         const dailyData = response[dropdownIndex];
+        const diseaseName = dropdownIndex === 0 ? 'Flu' : 'COVID';
         // ************ Daily aggregatation *********
         let perDay = new Object();
         dailyData.forEach((d) => {
@@ -211,6 +212,10 @@ function loadAndDisplay (dropdownIndex) {
         weeklyLocationsDisp.textContent = uniqueItems(thisWeek,'location');
         weeklyLocationsChange.textContent = uniqueItems(thisWeek,'location') - uniqueItems(lastWeek, 'location');
         totalLocations.textContent = uniqueItems(dailyData, 'location'); 
+        //Setting titles
+        document.getElementById('dailyTitle').textContent = diseaseName==='Flu' ? "Number of Daily Flu Tweets in the Maritimes" : "Number of Daily COVID-19 Tweets in HRM";
+        document.getElementById("diseaseHeader1").textContent = diseaseName;
+        document.getElementById("diseaseHeader2").textContent = diseaseName;
     });
 }
 
@@ -236,6 +241,16 @@ function createWordCloud(apiCorpus, htmlID){
         corpusChart.container(htmlID);
         corpusChart.draw();    
     });
+}
+
+let dropDown = document.getElementById("diseaseDropdown");
+dropDown.onchange = function(){
+    document.getElementById('allUsers').textContent = '';
+    document.getElementById('weekUsers').textContent = '';
+    document.getElementById('dailyTweetsViz').textContent = '';
+    document.getElementById('locationGraphViz').textContent = '';
+    let newVal = dropDown.value;
+    loadAndDisplay(newVal);
 }
 
 loadAndDisplay(0);

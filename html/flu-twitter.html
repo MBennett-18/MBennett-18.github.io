@@ -71,6 +71,10 @@
         </section>
         <section id="contentData" class="tab-content">
             <div class="tweetCounts">
+                <select id="diseaseDropdown">
+                    <option value="0" selected="selected">Influenza</option>
+                    <option value="1">COVID-19</option>
+                </select>
                 <div class="banner">
                     <div class="banner-item">
                         <h2>Weekly Tweets</h2>
@@ -87,7 +91,7 @@
                 </div>
                 <br>
                 <div class="dailyGraph">
-                    <h2 id="dailyTitle">Number of Daily Flu Tweets in Maritimes-ish</h2>
+                    <h2 id="dailyTitle"></h2>
                     <div id="dailyTweetsViz" style="height: 550px;" ></div>
                 </div>
             </div>
@@ -112,11 +116,11 @@
                 <br>
                 <div class="userVisual">
                     <div class="totalUserTop">
-                        <h2>Top <span class="topN">n</span> Users with Flu Tweets</h2>
+                        <h2>Top <span class="topN">n</span> Users with <span id="diseaseHeader1">Flu</span> Tweets</h2>
                         <div class="userTop-viz" id="allUsers" style="height: 450px;" ></div>
                      </div>
                      <div class="totalUserWeek">
-                        <h2>Top <span class="topN-week">n</span> Weekly Users with Flu Tweets</h2>
+                        <h2>Top <span class="topN-week">n</span> Weekly Users with <span id="diseaseHeader2">Flu</span> Tweets</h2>
                         <div class="userTop-viz" id="weekUsers" style="height: 450px;" ></div>
                     </div>
                 </div>
