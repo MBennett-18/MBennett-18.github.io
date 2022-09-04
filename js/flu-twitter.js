@@ -133,10 +133,10 @@ function loadAndDisplay (dropdownIndex) {
             perLoc[d.location] = perLoc[d.location] ? ++perLoc[d.location]:1;
         })
         //Get number of tweets per location to display
-
+        let minTweets = diseaseName==='Flu' ? 5 : 3;
         let perLocSortable = [];
         for (let loc in perLoc){
-            if(perLoc[loc]>=3) {
+            if(perLoc[loc]>=minTweets) {
                 perLocSortable.push([titleCase(loc), perLoc[loc]]);
             }
         };
