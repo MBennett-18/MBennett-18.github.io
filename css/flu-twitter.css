@@ -249,9 +249,18 @@ label {
     width: 50%;
   }
 
-  #contentAnalysis{
+
+
+.wordClouds{
+    display: flex;
     text-align: center;
-  }
+}
+
+.wordClouds > div{
+    flex: 1;
+}
+
+
 
   @media only screen and (max-width: 900px) {
     label span {

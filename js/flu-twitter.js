@@ -45,7 +45,7 @@ const fetchedData = Promise.all([fetchDailyFlu, fetchDailyCovid]);
 function loadAndDisplay (dropdownIndex) {
     fetchedData.then((response) => {
         const dailyData = response[dropdownIndex];
-        const diseaseName = dropdownIndex === 0 ? 'Flu' : 'COVID';
+        const diseaseName = dropdownIndex === 0 | dropdownIndex === '0' ? 'Flu' : 'COVID';
         // ************ Daily aggregatation *********
         let perDay = new Object();
         dailyData.forEach((d) => {
@@ -133,7 +133,7 @@ function loadAndDisplay (dropdownIndex) {
             perLoc[d.location] = perLoc[d.location] ? ++perLoc[d.location]:1;
         })
         //Get number of tweets per location to display
-        let minTweets = diseaseName==='Flu' ? 5 : 3;
+        let minTweets = diseaseName==='Flu' ? 5 : 1;
         let perLocSortable = [];
         for (let loc in perLoc){
             if(perLoc[loc]>=minTweets) {
@@ -243,6 +243,33 @@ function createWordCloud(apiCorpus, htmlID){
     });
 }
 
+const fetchFluSent = fetch('https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/fluSentWeek.json').then((response) => response.json());
+const fetchCovidSent = fetch('https://tweetscrapestorage.s3.ca-central-1.amazonaws.com/covidSentWeek.json').then((response) => response.json());
+const fetchedSentData = Promise.all([fetchFluSent, fetchCovidSent]);
+
+function sentimentCharts () {
+    fetchedSentData.then((response) => { 
+        let fluData = response[0]
+        let fluWeekly = [];
+        for (let e in fluData){
+            fluWeekly.push([fluData[e]['week'], fluData[e]['weeklyMean']]);
+        };
+        let covidData = response[1]
+        let covidWeekly = [];
+        for (let e in covidData){
+            covidWeekly.push([covidData[e]['week'], covidData[e]['weeklyMean']]);
+        };
+
+        chart = anychart.line();
+        const series = chart.line(fluWeekly);
+        chart.container("weeklySentiment");
+        chart.draw();
+
+    })
+}
+
+
+
 let dropDown = document.getElementById("diseaseDropdown");
 dropDown.onchange = function(){
     document.getElementById('allUsers').textContent = '';
@@ -254,6 +281,7 @@ dropDown.onchange = function(){
 }
 
 loadAndDisplay(0);
+sentimentCharts();
 
 createWordCloud(apiFluCorpus, 'fluCloud');
 createWordCloud(apiCovidCorpus, 'covidCloud');

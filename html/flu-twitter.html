@@ -152,15 +152,22 @@
             </div>  
         </section>
         <section id="contentAnalysis" class="tab-content">
-            <h2>Top 100 Words Accompaning Tweets about the Flu</h2>
-			<div id="fluCloud" style="height: 500px;"></div>
+            <div class="wordClouds">
+                <div class="contentFluCloud">
+                    <h3>Top 100 Words Accompaning Tweets about the Flu</h2>
+                    <div id="fluCloud" style="height: 500px;"></div>
+                </div>
+                <div class="contentCovidCloud">
+                    <h3>Top 100 Words Accompaning Tweets about COVID-19</h2>
+                    <div id="covidCloud" style="height: 500px;"></div>
+                </div>
+            </div>
             <br>
             <hr>
             <br>
-            <h2>Top 100 Words Accompaning Tweets about COVID-19</h2>
-            <div id="covidCloud" style="height: 500px;"></div>
+            <div id="weeklySentiment" style="height: 500px;"></div>
         </section>
     </div>
-    <script src="/js/flu-twitter.js"></script>
+    <script src="/js/flu-twitter.js" ></script>
 </body>
 </html>
