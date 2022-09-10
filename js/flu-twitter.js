@@ -261,7 +261,21 @@ function sentimentCharts () {
         };
 
         chart = anychart.line();
+        const refLine = chart.lineMarker();
+        refLine.axis(chart.yAxis());
+        refLine.value(0);
+
+        refLine.stroke({
+            thickness: 2,
+            color: "#9d9d9d",
+            dash: "2 4"
+        });
+        chart.xAxis().labels().rotation(-45);
+        
         const series = chart.line(fluWeekly);
+        const series2 = chart.line(covidWeekly);
+        series.name("Flu Tweet Sentiment");
+        series2.name("COVID-19 Tweet Sentiment");
         chart.container("weeklySentiment");
         chart.draw();
 
@@ -280,6 +294,7 @@ dropDown.onchange = function(){
     loadAndDisplay(newVal);
 }
 
+//Call functions that load data, manipulate, and chart
 loadAndDisplay(0);
 sentimentCharts();
 
