@@ -10,7 +10,18 @@
     <title>ND Report</title>
 </head>
 <body>
+    <select id="diseaseDropdown">
+        <option value="Chlamydia" selected="selected">Chlamydia</option>
+        <option value="Methicillin Resistant Staphylococcus Aureus">MRSA</option>
+        <option value="Gonorrhea">Gonorrhea</option>
+    </select>
+    <select id="metricDropdown">
+        <option value="Counts" selected="selected">Counts</option>
+        <option value="Rate">Rate per 100k</option>
+    </select>
     <div class="annualCounts" id="annualCounts-id" style="height: 450px;" ></div>
     <script src="/js/nd-reporting.js" ></script>
 </body>
 </html>
+
+
