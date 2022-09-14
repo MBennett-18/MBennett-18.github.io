@@ -27,6 +27,8 @@ function makeViz(dropDownDisease, dropDownMetric){
     series.name(dataSortable[0][1]);
     chart.yScale().minimum(0);
     chart.xScale().mode('continuous');
+    chart.xAxis().title("Year");
+    chart.yAxis().title(dropDownMetric);
 
     chart.container("annualCounts-id");
 
