@@ -1,8 +1,10 @@
-
+let meanMetricDisp = document.querySelector(".meanMetric");
+let metricDisp = document.getElementById("ndMetric")
 
 const apiCounts = "https://data.novascotia.ca/resource/mdfn-jkdg.json";
 const dropDownDisease = document.getElementById("diseaseDropdown");
 const dropDownMetric= document.getElementById("metricDropdown");
+
 
 function makeViz(dropDownDisease, dropDownMetric){
     fetch(apiCounts)
@@ -18,22 +20,32 @@ function makeViz(dropDownDisease, dropDownMetric){
             return a[0] - b[0];
         });
 
-    // create a chart
-    const data = anychart.data.set(dataSortable)
-    const seriesData = data.mapAs({x: 0, value: metric});
-    const chart = anychart.area();
-    const series = chart.area(seriesData);
+        const parseMetric = dataSortable.map(x => {
+            getStr = x[metric];
+            return Number(getStr);
+        });
 
-    series.name(dataSortable[0][1]);
-    chart.yScale().minimum(0);
-    chart.xScale().mode('continuous');
-    chart.xAxis().title("Year");
-    chart.yAxis().title(dropDownMetric);
+        const annualMean = parseMetric.reduce((a,b)=> a+b,0)/parseMetric.length;
 
-    chart.container("annualCounts-id");
+        meanMetricDisp.textContent = Math.round(annualMean*100)/100;
+        metricDisp.textContent = dropDownMetric;
+        
+        // create a chart
+        const data = anychart.data.set(dataSortable)
+        const seriesData = data.mapAs({x: 0, value: metric});
+        const chart = anychart.area();
+        const series = chart.area(seriesData);
 
-    // initiate drawing the chart
-    chart.draw();
+        series.name(dataSortable[0][1]);
+        chart.yScale().minimum(0);
+        chart.xScale().mode('continuous');
+        chart.xAxis().title("Year");
+        chart.yAxis().title(dropDownMetric);
+
+        chart.container("annualCounts-id");
+
+        // initiate drawing the chart
+        chart.draw();
     });
 }
 

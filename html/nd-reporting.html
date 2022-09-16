@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="/css/nd-reporting.css"/>   -->
+    <link rel="stylesheet" href="/css/flu-twitter.css"/>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
     <title>ND Report</title>
@@ -14,11 +15,32 @@
         <option value="Chlamydia" selected="selected">Chlamydia</option>
         <option value="Methicillin Resistant Staphylococcus Aureus">MRSA</option>
         <option value="Gonorrhea">Gonorrhea</option>
+        <option value="Clostridium difficile">Clostridium difficile</option>
+        <option value="Human Immunodeficiency Virus">Human Immunodeficiency Virus</option>
+        <option value="Hepatitis C">Hepatitis C</option>
+        <option value="Pneumococcal Disease Invasive">Pneumococcal Disease Invasive</option>
+        <option value="Vancomycin Resistant Enterococcus">Vancomycin Resistant Enterococcus</option>
+        <option value="Campylobacteriosis">Campylobacteriosis</option>
+        <option value="Cryptosporidiosis">Cryptosporidiosis</option>
+        <option value="Giardiasis">Giardiasis</option>
+        <option value="Salmonellosis">Salmonellosis</option>
+        <option value="Shigellosis">Shigellosis</option>
+        <option value="Verotoxigenic E.coli">Verotoxigenic E.coli</option>
+        <option value="Syphilis - Infectious">Syphilis - Infectious</option>
+        <option value="Pertussis">Pertussis</option>
+        <option value="Lyme Disease - Confirmed">Lyme Disease - Confirmed</option>
     </select>
     <select id="metricDropdown">
         <option value="Counts" selected="selected">Counts</option>
         <option value="Rate per 100k">Rate per 100k</option>
     </select>
+
+    <div class="banner">
+        <div class="banner-item" style="flex-basis: 250px;">
+            <h2>Mean Annual <span id="ndMetric"> Metric </span> </h2>
+            <h1 class="meanMetric">#</h1>
+        </div>
+    </div>
     <div class="annualCounts" id="annualCounts-id" style="height: 450px;" ></div>
     <script src="/js/nd-reporting.js" ></script>
     <a href="/html/about-me.html">Home</a>
@@ -26,3 +48,4 @@
 </html>
 
 
+	
